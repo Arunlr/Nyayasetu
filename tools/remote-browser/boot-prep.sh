@@ -36,6 +36,11 @@ EOF
 echo "[boot] endpoint: https://8080-${SANDBOX_ID}.e2b.app"
 
 # 4. commit + push so codespace relays can follow the endpoint
+BRANCH_REF="refs/remotes/origin/${BRANCH}"
+git fetch origin "${BRANCH}:${BRANCH_REF}" >/dev/null 2>&1 || true
+if git rev-parse --verify --quiet "$BRANCH_REF" >/dev/null; then
+  git reset --soft "$BRANCH_REF" >/dev/null 2>&1 || true
+fi
 git add -A . >/dev/null 2>&1 || true
 git commit -m "bridge: update endpoint (sandbox ${SANDBOX_ID})" --quiet >/dev/null 2>&1 || echo "[boot] nothing new to commit"
 git push origin "$BRANCH" --quiet 2>&1 | tail -1 || echo "[boot] push failed (non-fatal)"
