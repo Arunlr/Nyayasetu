@@ -137,11 +137,10 @@
     } else if (!statusInfo.relays) {
       ovStatus.innerHTML = '<span class="spin"></span>Browser is up — waiting for the <b>network tunnel</b>.';
       ovBody.innerHTML = `
-        <p>Spline is blocked from this sandbox, so we tunnel traffic through a GitHub Codespace:</p>
-        <p>1. Open <b>github.com</b> → any repo → <b>Code ▾ → Codespaces → Create codespace</b> (2-core is fine).</p>
-        <p>2. In its <b>Terminal</b>, paste this and press Enter:</p>
+        <p>Spline is blocked from this sandbox, so we tunnel traffic through a GitHub Codespace.</p>
+        <p><b>One-time setup</b> — in your Codespace terminal, paste this:</p>
         <code id="relayCmd">loading…</code>
-        <p class="hint">Click the command to copy. Keep the codespace tab open — it IS the internet connection for this browser.</p>`;
+        <p class="hint">Click to copy. This is a <b>self-healing</b> relay — you only run it once, even if the sandbox restarts. Keep the codespace tab open — it IS the internet connection for this browser.</p>`;
       fetch('/api/status').then(r => r.json()).then(s => {
         const el = document.getElementById('relayCmd');
         el.textContent = s.relayCmd || '…';

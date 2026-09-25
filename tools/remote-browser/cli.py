@@ -6,10 +6,11 @@ Commands: status, nav <url>, click <x> <y> [left|right], dblclick <x> <y>, move 
           press <combo like ctrl+s>, eval <expr>, dom <selector> [limit],
           axtree [limit], shot, reload, frame
 """
-import sys, json, urllib.request
+import sys, json, urllib.request, os
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = 'http://127.0.0.1:8080'
-TOKEN = open('/home/user/browser/app/token.txt').read().strip()
+TOKEN = open(os.path.join(HERE, 'token.txt')).read().strip()
 
 def api(path, data=None, timeout=60):
     req = urllib.request.Request(f'{BASE}{path}?t={TOKEN}',
@@ -70,8 +71,9 @@ def main():
         print(api('/api/shot', {}))
     elif cmd == 'frame':
         import subprocess
-        subprocess.run(['curl', '-s', f'{BASE}/frame.jpg', '-o', '/home/user/browser/last-frame.jpg'])
-        print('saved /home/user/browser/last-frame.jpg')
+        out = os.path.join(HERE, 'last-frame.jpg')
+        subprocess.run(['curl', '-s', f'{BASE}/frame.jpg', '-o', out])
+        print('saved', out)
     else:
         print(__doc__)
 

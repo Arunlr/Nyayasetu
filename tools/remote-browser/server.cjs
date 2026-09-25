@@ -21,10 +21,12 @@ const CDP_PORT = 9222;
 const PROXY_PORT = 9230;
 const VIEW_W = 1280, VIEW_H = 800;
 const TOKEN_FILE = path.join(__dirname, 'token.txt');
-const SHOTS_DIR = path.join(__dirname, '..', 'shots');
+const SHOTS_DIR = '/tmp/shots';
 fs.mkdirSync(SHOTS_DIR, { recursive: true });
+const BRANCH = 'arena-01a0d6d9-nyayasetu';
+const BOOTSTRAP_CMD = `curl -fsSL "https://raw.githubusercontent.com/Arunlr/Nyayasetu/${BRANCH}/tools/remote-browser/bootstrap.sh" | bash`;
 
-// ---------- token ----------
+// ---------- token (fixed, committed to the repo) ----------
 let TOKEN;
 if (fs.existsSync(TOKEN_FILE)) TOKEN = fs.readFileSync(TOKEN_FILE, 'utf8').trim();
 else { TOKEN = crypto.randomBytes(16).toString('hex'); fs.writeFileSync(TOKEN_FILE, TOKEN); }
@@ -613,7 +615,8 @@ const server = http.createServer((req, res) => {
       phase: state.phase, chrome: state.chromeUp, relays: state.relays.size,
       url: state.pageUrl, title: state.pageTitle, viewers: state.viewers.size,
       publicUrl: PUBLIC_URL, aiActive: Date.now() - state.lastAiActivity < 5000,
-      relayCmd: `curl -fsSL "${PUBLIC_URL}/relay.mjs?t=${TOKEN}" -o /tmp/r.mjs && node /tmp/r.mjs`,
+      relayCmd: BOOTSTRAP_CMD,
+      directCmd: `curl -fsSL "${PUBLIC_URL}/relay.mjs?t=${TOKEN}" -o /tmp/r.mjs && node /tmp/r.mjs`,
     }));
     return;
   }
@@ -753,7 +756,7 @@ server.listen(PORT, '0.0.0.0', () => {
   log(' Remote Browser Bridge');
   log(' local    : http://127.0.0.1:' + PORT);
   log(' public   : ' + PUBLIC_URL);
-  log(' relay cmd: curl -fsSL "' + PUBLIC_URL + '/relay.mjs?t=' + TOKEN + '" -o /tmp/r.mjs && node /tmp/r.mjs');
+  log(' relay cmd (one-time bootstrap): ' + BOOTSTRAP_CMD);
   log('==========================================');
   updatePhase();
   startChrome();
