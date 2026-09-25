@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote Browser — Spline Bridge</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0b0d12; color: #e8eaf0; font-family: ui-sans-serif, system-ui, sans-serif; overflow: hidden; }
+  #topbar {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+    background: #11141c; border-bottom: 1px solid #232838; font-size: 13px; flex-wrap: wrap;
+  }
+  #led { width: 10px; height: 10px; border-radius: 50%; background: #f44; box-shadow: 0 0 8px currentColor; }
+  #led.ok { background: #4f6; } #led.mid { background: #fd4; }
+  #url { flex: 1; min-width: 200px; color: #9aa3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #fps { color: #9aa3b8; }
+  #aiBadge {
+    display: none; background: #2b2b12; color: #ffd94a; border: 1px solid #6b5e1e;
+    padding: 2px 8px; border-radius: 10px; font-size: 12px;
+  }
+  button {
+    background: #1b2030; color: #e8eaf0; border: 1px solid #2c3448; border-radius: 8px;
+    padding: 4px 10px; font-size: 12px; cursor: pointer;
+  }
+  button:hover { background: #242b40; }
+  #wrap { position: relative; height: calc(100% - 37px); display: flex; align-items: center; justify-content: center; }
+  #stage { position: relative; }
+  canvas { display: block; background: #fff; cursor: none; border-radius: 4px; box-shadow: 0 4px 40px rgba(0,0,0,.5); }
+  #cursor { position: absolute; width: 18px; height: 18px; pointer-events: none; transform: translate(-2px, -2px); z-index: 5; display: none; }
+  #cursor::after { content: ''; position: absolute; left: 1px; top: 1px; width: 2px; height: 14px; background: #000; transform: rotate(-14deg); border-radius: 2px; outline: 1px solid rgba(255,255,255,.8); }
+  #cursor::before { content: ''; position: absolute; left: 1px; top: 1px; width: 12px; height: 12px; background: #000; border-radius: 0 0 0 8px; outline: 1px solid rgba(255,255,255,.8); }
+  #overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(8,10,15,.92); z-index: 10; padding: 20px;
+  }
+  #overlay .card { max-width: 640px; background: #12161f; border: 1px solid #262d40; border-radius: 14px; padding: 24px 28px; }
+  #overlay h2 { font-size: 18px; margin-bottom: 8px; }
+  #overlay p { color: #aab3c8; font-size: 13.5px; line-height: 1.55; margin: 8px 0; }
+  #overlay code {
+    display: block; background: #0a0d13; border: 1px solid #2a3247; border-radius: 8px;
+    padding: 10px 12px; margin: 10px 0; font-size: 12px; color: #7fe3a0; word-break: break-all;
+    white-space: pre-wrap; user-select: all; cursor: pointer;
+  }
+  #overlay .hint { font-size: 12px; color: #67718a; }
+  .spin { display: inline-block; width: 12px; height: 12px; border: 2px solid #445; border-top-color: #8af; border-radius: 50%; animation: sp 1s linear infinite; vertical-align: -2px; margin-right: 6px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div id="led"></div>
+  <div id="url">connecting…</div>
+  <span id="aiBadge">⚡ agent is driving</span>
+  <span id="fps"></span>
+  <button id="btnFull">Fullscreen</button>
+  <button id="btnReload">Reload</button>
+</div>
+<div id="wrap">
+  <div id="stage">
+    <canvas id="cv" width="1280" height="800"></canvas>
+    <div id="cursor"></div>
+    <div id="overlay">
+      <div class="card" id="ovCard">
+        <h2>🌐 Remote Browser Bridge</h2>
+        <p id="ovStatus"><span class="spin"></span>Starting…</p>
+        <div id="ovBody"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(() => {
+  const VW = 1280, VH = 800;
+  const cv = document.getElementById('cv');
+  const cx = cv.getContext('2d');
+  const cursor = document.getElementById('cursor');
+  const overlay = document.getElementById('overlay');
+  const ovStatus = document.getElementById('ovStatus');
+  const ovBody = document.getElementById('ovBody');
+  const led = document.getElementById('led');
+  const urlEl = document.getElementById('url');
+  const fpsEl = document.getElementById('fps');
+  const aiBadge = document.getElementById('aiBadge');
+
+  let ws = null, phase = 'boot', statusInfo = {};
+  let frames = 0, fpsT = performance.now();
+  let hasFrame = false;
+
+  function send(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+  const i = (e) => send({ t: 'i', e });
+
+  function fit() {
+    const wrap = document.getElementById('wrap');
+    const availW = wrap.clientWidth - 24, availH = wrap.clientHeight - 24;
+    const s = Math.min(availW / VW, availH / VH);
+    cv.style.width = Math.round(VW * s) + 'px';
+    cv.style.height = Math.round(VH * s) + 'px';
+    document.getElementById('stage').style.width = cv.style.width;
+    document.getElementById('stage').style.height = cv.style.height;
+  }
+  window.addEventListener('resize', fit);
+
+  function connect() {
+    const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+    ws = new WebSocket(`${proto}://${location.host}/view-ws`);
+    ws.binaryType = 'arraybuffer';
+    ws.onopen = () => send({ t: 'hello' });
+    ws.onmessage = (ev) => {
+      if (typeof ev.data === 'string') {
+        const m = JSON.parse(ev.data);
+        if (m.t === 'status') { statusInfo = m; phase = m.phase; renderStatus(); }
+      } else {
+        const blob = new Blob([ev.data], { type: 'image/jpeg' });
+        createImageBitmap(blob).then(bmp => {
+          cx.drawImage(bmp, 0, 0, VW, VH);
+          bmp.close();
+          hasFrame = true;
+          frames++;
+          const now = performance.now();
+          if (now - fpsT > 1000) { fpsEl.textContent = frames + ' fps'; frames = 0; fpsT = now; }
+        });
+      }
+    };
+    ws.onclose = () => { setTimeout(connect, 1500); };
+    ws.onerror = () => {};
+  }
+
+  function renderStatus() {
+    led.className = phase === 'ready' ? 'ok' : (statusInfo.chrome ? 'mid' : '');
+    urlEl.textContent = (statusInfo.url || 'about:blank') + (statusInfo.title ? ' — ' + statusInfo.title : '');
+    if (phase === 'ready' && hasFrame && statusInfo.relays) { overlay.style.display = 'none'; return; }
+    overlay.style.display = 'flex';
+    if (!statusInfo.chrome) {
+      ovStatus.innerHTML = '<span class="spin"></span>Waiting for browser…';
+      ovBody.innerHTML = '';
+    } else if (!statusInfo.relays) {
+      ovStatus.innerHTML = '<span class="spin"></span>Browser is up — waiting for the <b>network tunnel</b>.';
+      ovBody.innerHTML = `
+        <p>Spline is blocked from this sandbox, so we tunnel traffic through a GitHub Codespace:</p>
+        <p>1. Open <b>github.com</b> → any repo → <b>Code ▾ → Codespaces → Create codespace</b> (2-core is fine).</p>
+        <p>2. In its <b>Terminal</b>, paste this and press Enter:</p>
+        <code id="relayCmd">loading…</code>
+        <p class="hint">Click the command to copy. Keep the codespace tab open — it IS the internet connection for this browser.</p>`;
+      fetch('/api/status').then(r => r.json()).then(s => {
+        const el = document.getElementById('relayCmd');
+        el.textContent = s.relayCmd || '…';
+        el.onclick = () => { navigator.clipboard.writeText(s.relayCmd || ''); el.style.outline = '2px solid #7fe3a0'; setTimeout(() => el.style.outline = '', 400); };
+      });
+    } else {
+      ovStatus.innerHTML = '<span class="spin"></span>Tunnel connected — loading page…';
+      ovBody.innerHTML = '<p>If a page failed while the tunnel was down, press <b>Reload</b> (top-right).</p>';
+    }
+  }
+
+  // ---------- input ----------
+  const btnMap = { 0: 'left', 1: 'middle', 2: 'right' };
+  function modsOf(e) {
+    let m = 0;
+    if (e.altKey) m |= 1; if (e.ctrlKey) m |= 2; if (e.metaKey) m |= 4; if (e.shiftKey) m |= 8;
+    return m;
+  }
+  function cssXY(e) {
+    const r = cv.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * VW / r.width, y: (e.clientY - r.top) * VH / r.height };
+  }
+  function moveCursor(e) {
+    const r = cv.getBoundingClientRect();
+    cursor.style.left = (e.clientX - r.left) + 'px';
+    cursor.style.top = (e.clientY - r.top) + 'px';
+  }
+  let lastMoveSent = 0;
+  cv.addEventListener('pointermove', (e) => {
+    moveCursor(e);
+    const now = performance.now();
+    if (now - lastMoveSent < 16) return;
+    lastMoveSent = now;
+    const { x, y } = cssXY(e);
+    i({ kind: 'mouse', type: 'moved', x, y, buttons: e.buttons, modifiers: modsOf(e) });
+    if (e.buttons) cursor.style.transform = 'translate(-2px,-2px) scale(.85)';
+    else cursor.style.transform = 'translate(-2px,-2px)';
+  });
+  cv.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    cv.setPointerCapture(e.pointerId);
+    cursor.style.display = 'block';
+    moveCursor(e);
+    const { x, y } = cssXY(e);
+    i({ kind: 'mouse', type: 'pressed', x, y, button: btnMap[e.button] || 'left', buttons: e.buttons, modifiers: modsOf(e), clickCount: e.detail || 1 });
+  });
+  cv.addEventListener('pointerup', (e) => {
+    e.preventDefault();
+    const { x, y } = cssXY(e);
+    i({ kind: 'mouse', type: 'released', x, y, button: btnMap[e.button] || 'left', buttons: e.buttons, modifiers: modsOf(e), clickCount: e.detail || 1 });
+  });
+  cv.addEventListener('contextmenu', (e) => e.preventDefault());
+  cv.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const { x, y } = cssXY(e);
+    i({ kind: 'mouse', type: 'wheel', x, y, deltaX: Math.round(e.deltaX), deltaY: Math.round(e.deltaY), modifiers: modsOf(e) });
+  }, { passive: false });
+
+  window.addEventListener('keydown', (e) => {
+    if (overlay.style.display !== 'none' && !hasFrame) return;
+    if (e.key === 'F11' || (e.key === 'f' && e.shiftKey)) return;
+    e.preventDefault();
+    i({ kind: 'key', type: 'down', key: e.key, modifiers: modsOf(e), code: e.code });
+  });
+  window.addEventListener('keyup', (e) => {
+    if (e.key === 'F11') return;
+    e.preventDefault();
+    i({ kind: 'key', type: 'up', key: e.key, modifiers: modsOf(e), code: e.code });
+  });
+  window.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const txt = (e.clipboardData || window.clipboardData).getData('text');
+    if (txt) i({ kind: 'text', text: txt.slice(0, 5000) });
+  });
+
+  document.getElementById('btnFull').onclick = () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.getElementById('wrap').requestFullscreen();
+  };
+  document.getElementById('btnReload').onclick = () => i({ kind: 'reload' });
+  setInterval(async () => {
+    try {
+      const s = await (await fetch('/api/status', { cache: 'no-store' })).json();
+      statusInfo = s; phase = s.phase; renderStatus();
+      aiBadge.style.display = s.aiActive ? 'inline-block' : 'none';
+    } catch {}
+  }, 1500);
+
+  fit();
+  connect();
+})();
+</script>
+</body>
+</html>
