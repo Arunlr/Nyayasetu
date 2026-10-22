@@ -71,7 +71,7 @@ $('#seeAll').addEventListener('click', e => {
 
 /* ── Smile gallery: tilted collage strip (video outro) ── */
 $('#galTrack').innerHTML = '<span>Happy Smiles ✳ Happy Smiles ✳ Happy Smiles ✳&nbsp;</span>'.repeat(2);
-const galImgs = ['hero.jpg','kids.jpg','service-smile.jpg','help-kids-new.jpg','help-teen.jpg','service-whitening.jpg','help-adults.jpg','consult.jpg'];
+const galImgs = ['hero-dmx.jpg','svc-kids-dmx.jpg','svc-braces-dmx.jpg','help-kids-dmx.jpg','help-teen-dmx.jpg','svc-laser-dmx.jpg','help-adults.jpg','consult-dmx.jpg'];
 $('#galStrip').innerHTML = [...galImgs, ...galImgs].map((s,i)=>`
   <figure class="gal-card" style="--tilt:${i%2? 3.5 : -3.5}deg"><img src="assets/${s}" alt="Happy patient smile" loading="lazy"></figure>`).join('');
 

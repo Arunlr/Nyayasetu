@@ -377,3 +377,8 @@ label.full{margin-bottom:.4rem}
 .wa-float{background:#fff}
 .wa-float img{width:38px;height:38px}
 h3 .wa-ico{width:24px;height:24px;vertical-align:-5px}
+
+.social-row{display:flex;gap:.6rem;margin-top:1rem}
+.social-row a{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(90,40,0,.18);transition:.3s var(--spring)}
+.social-row a:hover{transform:translateY(-3px) scale(1.08)}
+.social-row img{width:24px;height:24px}
