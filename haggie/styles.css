@@ -169,47 +169,49 @@ h2 em,h3 em{font-style:italic;font-weight:500;color:var(--plum-m)}
 .promise-head{max-width:700px;margin-bottom:2.6rem}
 .promise-head p{margin-top:.85rem;color:var(--muted);line-height:1.68;font-size:.98rem}
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
-.step-card{background:#fff;border-radius:24px;padding:1.65rem 1.45rem;border:1px solid rgba(60,22,48,.09);box-shadow:0 14px 34px rgba(60,22,48,.06);display:flex;flex-direction:column;gap:.75rem;transition:.4s var(--spring);position:relative;overflow:hidden}
-.step-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--plum),var(--coral))}
-.step-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(60,22,48,.12)}
-.step-no{font-size:2.1rem;font-style:italic;color:var(--coral);line-height:1}
-.step-card h3{font-size:1.35rem;color:var(--plum);line-height:1.18}
-.step-card p{font-size:.9rem;line-height:1.62;color:var(--muted)}
-.step-count{margin-top:auto;padding-top:.7rem;font-size:.75rem;font-weight:700;color:var(--plum-m);letter-spacing:.04em}
+.step-card{background:#fff;border-radius:24px;border:1px solid rgba(60,22,48,.09);box-shadow:0 14px 34px rgba(60,22,48,.06);display:flex;flex-direction:column;transition:.4s var(--spring);position:relative;overflow:hidden}
+.step-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(60,22,48,.13)}
+.step-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--blush)}
+.step-media img{width:100%;height:100%;object-fit:cover;transition:transform .65s var(--ease)}
+.step-card:hover .step-media img{transform:scale(1.07)}
+.step-media .step-no{position:absolute;top:.8rem;left:.85rem;background:rgba(38,12,30,.84);color:var(--peach);backdrop-filter:blur(8px);padding:.28rem .72rem;border-radius:99px;font-size:1.05rem;font-style:italic;line-height:1}
+.step-body{padding:1.35rem 1.35rem 1.45rem;display:flex;flex-direction:column;gap:.65rem;flex:1}
+.step-card h3{font-size:1.32rem;color:var(--plum);line-height:1.18}
+.step-card p{font-size:.89rem;line-height:1.62;color:var(--muted)}
+.step-count{margin-top:auto;padding-top:.65rem;font-size:.74rem;font-weight:700;color:var(--plum-m);letter-spacing:.03em;border-top:1px solid rgba(60,22,48,.07)}
 @media(max-width:980px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.steps-grid{grid-template-columns:1fr}}
 
-/* ───────── INTERACTIVE 2-COLUMN VISUAL TREATMENT STUDIO (Distinct from Accordion) ───────── */
+/* ───────── BOUTIQUE PHOTO-CARD TREATMENT STUDIO (All 8 Services With Visible Photos) ───────── */
 .studio{background:var(--ivory);padding:clamp(4rem,8vw,6.5rem) clamp(1rem,4vw,3rem)}
 .studio-wrap{max-width:1180px;margin:0 auto}
-.studio-head{display:flex;justify-content:space-between;align-items:end;gap:1.5rem;margin-bottom:2.4rem;flex-wrap:wrap}
+.studio-head{display:flex;justify-content:space-between;align-items:end;gap:1.5rem;margin-bottom:1.8rem;flex-wrap:wrap}
 .studio-head p{max-width:46ch;color:var(--muted);line-height:1.62;font-size:.95rem}
-.studio-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:2rem;align-items:start}
-.svc-list{display:flex;flex-direction:column;gap:.7rem}
-.svc-tab{width:100%;text-align:left;background:#fff;border:1.5px solid rgba(60,22,48,.11);border-radius:20px;padding:1.1rem 1.25rem;display:flex;align-items:center;gap:1rem;transition:.35s var(--ease)}
-.svc-tab:hover{border-color:var(--plum-m);transform:translateX(5px)}
-.svc-tab.active{background:var(--plum);color:#fff;border-color:var(--plum);box-shadow:0 16px 36px rgba(60,22,48,.2)}
-.tab-no{font-size:1.35rem;font-style:italic;color:var(--coral);min-width:1.9rem}
-.svc-tab.active .tab-no{color:var(--peach)}
-.tab-title{font-family:var(--serif);font-size:1.32rem;font-weight:600;flex:1}
-.tab-pill{font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.28rem .68rem;border-radius:99px;background:var(--blush);color:var(--plum)}
-.svc-tab.active .tab-pill{background:rgba(255,255,255,.16);color:var(--peach)}
-/* Mobile inline preview (hidden on desktop, shown cleanly on mobile!) */
-.svc-mobile-panel{display:none;padding:.95rem .2rem .3rem}
-.svc-mobile-panel img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;margin-bottom:.85rem}
-.svc-mobile-panel p{font-size:.9rem;line-height:1.62;color:var(--muted);margin-bottom:.9rem}
 
-.studio-stage{position:sticky;top:6.2rem;background:var(--blush-l);border:1.5px solid rgba(60,22,48,.1);border-radius:28px;overflow:hidden;box-shadow:0 24px 54px rgba(60,22,48,.1)}
-.stage-media{position:relative;aspect-ratio:16/9;overflow:hidden}
-.stage-media img{width:100%;height:100%;object-fit:cover;transition:opacity .35s var(--ease),transform .6s var(--ease)}
-.stage-badge{position:absolute;top:1rem;left:1rem;background:rgba(38,12,30,.82);color:var(--peach);backdrop-filter:blur(8px);padding:.38rem .85rem;border-radius:99px;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.stage-body{padding:1.75rem}
-.stage-body h3{font-size:1.95rem;color:var(--plum);margin-bottom:.65rem}
-.stage-body p{color:var(--muted);line-height:1.68;margin-bottom:1.35rem;font-size:.96rem}
-@media(max-width:860px){
-  .studio-layout{grid-template-columns:1fr}
-  .studio-stage{display:none}
-  .svc-item.active .svc-mobile-panel{display:block}
+.svc-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.1rem}
+.filter-btn{padding:.58rem 1.15rem;border-radius:99px;font-size:.82rem;font-weight:700;background:var(--blush-l);color:var(--plum);border:1.5px solid rgba(60,22,48,.12);transition:.3s var(--spring);min-height:42px}
+.filter-btn:hover{border-color:var(--plum);transform:translateY(-2px)}
+.filter-btn.is-active{background:var(--plum);color:#fff;border-color:var(--plum);box-shadow:0 10px 24px rgba(60,22,48,.2)}
+
+.svc-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.svc-photo-card{background:#fff;border-radius:26px;overflow:hidden;border:1.5px solid rgba(60,22,48,.1);box-shadow:0 16px 40px rgba(60,22,48,.07);display:flex;flex-direction:column;transition:transform .45s var(--spring),box-shadow .45s var(--ease),opacity .35s var(--ease)}
+.svc-photo-card:hover{transform:translateY(-8px);box-shadow:0 26px 54px rgba(60,22,48,.14);border-color:rgba(255,134,104,.55)}
+.svc-photo-card.is-hidden{display:none}
+.svc-photo-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--blush)}
+.svc-photo-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.svc-photo-card:hover .svc-photo-media img{transform:scale(1.06)}
+.svc-num-badge{position:absolute;top:.9rem;left:.95rem;background:rgba(38,12,30,.85);color:var(--peach);backdrop-filter:blur(8px);padding:.34rem .82rem;border-radius:99px;font-family:var(--serif);font-style:italic;font-size:1.02rem;font-weight:600;line-height:1}
+.svc-cat-badge{position:absolute;top:.9rem;right:.95rem;background:rgba(255,253,251,.92);color:var(--plum);backdrop-filter:blur(8px);padding:.34rem .82rem;border-radius:99px;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.svc-photo-body{padding:1.5rem 1.6rem 1.65rem;display:flex;flex-direction:column;gap:.65rem;flex:1}
+.svc-photo-body h3{font-size:clamp(1.45rem,2.4vw,1.8rem);color:var(--plum);line-height:1.15}
+.svc-photo-body p{color:var(--muted);line-height:1.65;font-size:.93rem;margin-bottom:.45rem}
+.svc-card-foot{margin-top:auto;padding-top:.85rem;border-top:1px solid rgba(60,22,48,.08);display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap}
+.svc-praise{font-size:.76rem;font-weight:700;color:var(--plum-m)}
+.svc-book-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.25rem;border-radius:99px;background:var(--plum);color:#fff;font-size:.84rem;font-weight:700;text-decoration:none;transition:.3s var(--spring);min-height:42px}
+.svc-book-btn:hover{background:var(--coral);transform:translateX(3px)}
+@media(max-width:820px){
+  .svc-cards-grid{grid-template-columns:1fr;gap:1.25rem}
+  .svc-photo-body{padding:1.25rem 1.3rem 1.4rem}
 }
 
 /* ───────── FOUNDER & WOMEN-OWNED BOUTIQUE CLINIC SHOWCASE ───────── */

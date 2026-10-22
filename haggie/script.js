@@ -56,61 +56,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 $$('.mask-lines, .reveal, .reveal-scale, .reveal-group, .reviews, .gallery').forEach(el => io.observe(el));
 $$('[data-count], [data-decimal]').forEach(el => io.observe(el));
 
-/* ── Interactive 2-Column Visual Treatment Studio + Mobile Accordion Fallback ── */
-const treatments = [
-  {
-    no: '01',
-    name: 'Scaling, Polishing & Gum Health',
-    tag: 'Preventive & Gums',
-    pick: 'Scaling, Polishing & Gum Care',
-    img: 'assets/svc-scaling-hge.jpg',
-    desc: 'Gentle ultrasonic stain & tartar removal, smooth enamel polishing, and gum care — leaving your teeth clean, healthy, and thoroughly checked with zero rush.'
-  },
-  {
-    no: '02',
-    name: 'Painless Root Canal & Crowns',
-    tag: 'Tooth Saving · RCT',
-    pick: 'Painless Root Canal & Crowns',
-    img: 'assets/svc-rootcanal-hge.jpg',
-    desc: 'Comfort-first root canal therapy explained clearly step by step before starting — relieving deep tooth pain gently and restoring natural strength with custom crowns.'
-  },
-  {
-    no: '03',
-    name: 'Wisdom Tooth & Gentle Extractions',
-    tag: 'Surgical Care',
-    pick: 'Wisdom Tooth Extraction',
-    img: 'assets/svc-wisdom-hge.jpg',
-    desc: 'Careful X-ray assessment, calm anaesthesia, smooth wisdom-tooth removal, and personal post-procedure follow-up from Dr. Haggie for a comfortable recovery.'
-  },
-  {
-    no: '04',
-    name: 'Aesthetic Fillings & Smile Care',
-    tag: 'Cosmetic & Restorative',
-    pick: 'Aesthetic Fillings & Smile Care',
-    img: 'assets/svc-smile-hge.jpg',
-    desc: 'Natural tooth-shaded fillings, crowns, bridges, and conservative smile enhancements crafted cleanly to match your natural smile.'
-  },
-  {
-    no: '05',
-    name: 'Braces & Orthodontic Alignment',
-    tag: 'Teens & Adults',
-    pick: 'Braces & Clear Aligners',
-    img: 'assets/svc-ortho-hge.jpg',
-    desc: 'Modern orthodontic braces and alignment solutions for teenagers and adults, guided patiently at every visit with transparent progress updates.'
-  },
-  {
-    no: '06',
-    name: 'Gentle Kids & Family Dentistry',
-    tag: 'All Ages',
-    pick: 'Kids & Family Check-Up',
-    img: 'assets/svc-kids-hge.jpg',
-    desc: 'Warm, reassuring dental check-ups for children, parents, and elders alike — helping anxious young patients feel right at home in the chair.'
-  }
-];
-
-const svcList = $('#svcList');
-const stageImg = $('#stageImg'), stageBadge = $('#stageBadge'), stageTitle = $('#stageTitle'), stageDesc = $('#stageDesc'), stageCta = $('#stageCta');
-
+/* ── Boutique Photo-Card Treatment Studio: Category Filter + WhatsApp Pre-Fill ── */
 function prefillService(val){
   const sel = $('#serviceSelect');
   if (!sel || !val) return;
@@ -120,55 +66,18 @@ function prefillService(val){
   setTimeout(() => { sel.style.outline = ''; }, 1600);
 }
 
-svcList.innerHTML = treatments.map((t, idx) => `
-  <div class="svc-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}">
-    <button type="button" class="svc-tab ${idx === 0 ? 'active' : ''}">
-      <span class="tab-no">${t.no}</span>
-      <span class="tab-title">${t.name}</span>
-      <span class="tab-pill">${t.tag}</span>
-    </button>
-    <div class="svc-mobile-panel">
-      <img src="${t.img}" alt="${t.name}" loading="lazy">
-      <p>${t.desc}</p>
-      <a class="btn btn-plum" href="#book" data-pick="${t.pick}">Book on WhatsApp →</a>
-    </div>
-  </div>
-`).join('');
-
-let activeIdx = 0, studioTimer;
-function selectTreatment(i){
-  activeIdx = i;
-  const t = treatments[i];
-  $$('.svc-item', svcList).forEach((el, j) => {
-    el.classList.toggle('active', j === i);
-    $('.svc-tab', el).classList.toggle('active', j === i);
-  });
-  stageImg.style.opacity = '.35';
-  setTimeout(() => {
-    stageImg.src = t.img;
-    stageImg.alt = t.name;
-    stageBadge.textContent = t.tag;
-    stageTitle.textContent = t.name;
-    stageDesc.textContent = t.desc;
-    stageCta.dataset.pick = t.pick;
-    stageCta.textContent = `Book ${t.name.split('&')[0].trim()} on WhatsApp →`;
-    stageImg.style.opacity = '1';
-  }, 140);
-}
-$$('.svc-item', svcList).forEach((el, i) => {
-  $('.svc-tab', el).addEventListener('click', () => {
-    clearInterval(studioTimer);
-    selectTreatment(i);
+$$('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.filter-btn').forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    const cat = btn.dataset.filter;
+    $$('#svcGrid .svc-photo-card').forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('is-hidden', !show);
+      if (show) card.classList.add('inview');
+    });
   });
 });
-const studioIO = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  studioTimer = setInterval(() => {
-    if (innerWidth > 860) selectTreatment((activeIdx + 1) % treatments.length);
-  }, 4200);
-  studioIO.disconnect();
-}), {threshold:.25});
-studioIO.observe(svcList);
 
 document.addEventListener('click', e => {
   const pickEl = e.target.closest('[data-pick]');
@@ -235,7 +144,7 @@ rvTrack.addEventListener('touchend', e => {
 
 /* ── Studio & Smile Gallery Filmstrip ── */
 $('#galTrack').innerHTML = '<span>5.0★ Calm Dental Studio ✦ Kothanur, Bengaluru ✦ Gentle Smiles ✦&nbsp;</span>'.repeat(2);
-const galImgs = ['hero-woman-hge.jpg','consult-hge.jpg','svc-scaling-hge.jpg','svc-rootcanal-hge.jpg','svc-wisdom-hge.jpg','svc-smile-hge.jpg','svc-ortho-hge.jpg','svc-kids-hge.jpg'];
+const galImgs = ['hero-woman-hge.jpg','checkup-xray-hge.jpg','exp-clean-hge.jpg','exp-gentle-hge.jpg','svc-scaling-hge.jpg','svc-rootcanal-hge.jpg','svc-wisdom-hge.jpg','svc-gumcare-hge.jpg','svc-smile-hge.jpg','svc-implants-hge.jpg','svc-ortho-hge.jpg','svc-kids-hge.jpg'];
 $('#galStrip').innerHTML = [...galImgs, ...galImgs].map((s,i)=>`
   <figure class="gal-card" style="--tilt:${i%2? 2.8 : -2.8}deg"><img src="assets/${s}" alt="Gentle dental care at Dr Haggie Dental care Kothanur" loading="lazy"></figure>`).join('');
 

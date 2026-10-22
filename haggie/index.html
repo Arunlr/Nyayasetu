@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=3">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='26' fill='%233c1630'/><text x='50' y='69' text-anchor='middle' font-size='56'>🦷</text></svg>">
 </head>
 <body>
@@ -125,37 +125,57 @@
 
     <div class="steps-grid reveal-group">
       <article class="step-card">
-        <span class="step-no">01</span>
-        <h3>Patient Listening &amp; Clear Explanations</h3>
-        <p>Before touching an instrument, Dr. Haggie understands your exact concern and walks you through your X-ray, diagnosis, and options in plain, reassuring language.</p>
-        <span class="step-count">★ #1 Mentioned Strength on Google (22 Reviews)</span>
+        <div class="step-media">
+          <img src="assets/checkup-xray-hge.jpg" alt="Dentist calmly explaining dental X-ray clearly to a smiling patient">
+          <span class="step-no">01</span>
+        </div>
+        <div class="step-body">
+          <h3>Patient Listening &amp; Clear Explanations</h3>
+          <p>Before touching an instrument, Dr. Haggie understands your exact concern and walks you through your X-ray, diagnosis, and options in plain, reassuring language.</p>
+          <span class="step-count">★ #1 Mentioned Strength on Google (22 Reviews)</span>
+        </div>
       </article>
 
       <article class="step-card">
-        <span class="step-no">02</span>
-        <h3>Welcoming, Spotless Facility</h3>
-        <p>From the moment you walk in, the clinic feels neat, calm, hygienic, and unhurried — supported by a cheerful, attentive care team.</p>
-        <span class="step-count">★ Praised for Clean Facility &amp; Calm Atmosphere</span>
+        <div class="step-media">
+          <img src="assets/exp-clean-hge.jpg" alt="Spotless sunlit modern boutique dental clinic treatment suite in Kothanur">
+          <span class="step-no">02</span>
+        </div>
+        <div class="step-body">
+          <h3>Welcoming, Spotless Facility</h3>
+          <p>From the moment you walk in, the clinic feels neat, calm, hygienic, and unhurried — supported by a cheerful, attentive care team.</p>
+          <span class="step-count">★ Praised for Clean Facility &amp; Calm Atmosphere</span>
+        </div>
       </article>
 
       <article class="step-card">
-        <span class="step-no">03</span>
-        <h3>Painless, Skilled Precision</h3>
-        <p>Whether you come in for routine scaling, a root canal, gum treatment, or wisdom-tooth removal, every step prioritizes gentle comfort.</p>
-        <span class="step-count">★ 15+ Reviews Highlight Painless Treatment</span>
+        <div class="step-media">
+          <img src="assets/exp-gentle-hge.jpg" alt="Female dentist gently caring for a relaxed smiling patient in the chair">
+          <span class="step-no">03</span>
+        </div>
+        <div class="step-body">
+          <h3>Painless, Skilled Precision</h3>
+          <p>Whether you come in for routine scaling, a root canal, gum treatment, or wisdom-tooth removal, every step prioritizes gentle comfort.</p>
+          <span class="step-count">★ 15+ Reviews Highlight Painless Treatment</span>
+        </div>
       </article>
 
       <article class="step-card">
-        <span class="step-no">04</span>
-        <h3>Personal Recovery Follow-Up</h3>
-        <p>Care doesn’t end at checkout — Dr. Haggie personally follows up on healing and post-visit comfort so you feel looked after throughout.</p>
-        <span class="step-count">★ Trusted by Whole Families &amp; Referrals</span>
+        <div class="step-media">
+          <img src="assets/exp-followup-hge.jpg" alt="Happy smiling patient checking personal follow-up message after treatment">
+          <span class="step-no">04</span>
+        </div>
+        <div class="step-body">
+          <h3>Personal Recovery Follow-Up</h3>
+          <p>Care doesn’t end at checkout — Dr. Haggie personally follows up on healing and post-visit comfort so you feel looked after throughout.</p>
+          <span class="step-count">★ Trusted by Whole Families &amp; Referrals</span>
+        </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ══════════ INTERACTIVE 2-COLUMN VISUAL TREATMENT STUDIO ══════════ -->
+<!-- ══════════ FULL PHOTO-SHOWCASE CLINICAL TREATMENTS (All 8 Services With Photos) ══════════ -->
 <section class="studio" id="services">
   <div class="studio-wrap">
     <div class="studio-head reveal">
@@ -163,23 +183,145 @@
         <span class="pill-tag on-light">Clinical Treatments</span>
         <h2 style="margin-top:.75rem">Complete Care, <em>Tailored Gently</em></h2>
       </div>
-      <p>Select any specialty below to explore how we care for your teeth and book directly with Dr. Haggie on WhatsApp.</p>
+      <p>Every treatment is explained clearly step by step before starting — tap any specialty below to pre-fill your WhatsApp appointment request.</p>
     </div>
 
-    <div class="studio-layout">
-      <div class="svc-list" id="svcList"></div>
+    <div class="svc-filters reveal" role="tablist" aria-label="Filter treatments by category">
+      <button type="button" class="filter-btn is-active" data-filter="all">All Treatments (8)</button>
+      <button type="button" class="filter-btn" data-filter="pain">Pain Relief &amp; Surgery</button>
+      <button type="button" class="filter-btn" data-filter="preventive">Scaling &amp; Gum Care</button>
+      <button type="button" class="filter-btn" data-filter="smile">Smile, Crowns &amp; Implants</button>
+      <button type="button" class="filter-btn" data-filter="family">Braces &amp; Family Care</button>
+    </div>
 
-      <div class="studio-stage" id="studioStage">
-        <div class="stage-media">
-          <img id="stageImg" src="assets/svc-scaling-hge.jpg" alt="Gentle ultrasonic scaling and teeth polishing">
-          <span class="stage-badge" id="stageBadge">Preventive &amp; Gum Care</span>
+    <div class="svc-cards-grid" id="svcGrid">
+      <article class="svc-photo-card reveal" data-cat="preventive">
+        <div class="svc-photo-media">
+          <img src="assets/svc-scaling-hge.jpg" alt="Gentle ultrasonic scaling and teeth polishing at Dr Haggie Dental care">
+          <span class="svc-num-badge">01</span>
+          <span class="svc-cat-badge">Preventive Care</span>
         </div>
-        <div class="stage-body">
-          <h3 id="stageTitle">Scaling, Polishing &amp; Gum Health</h3>
-          <p id="stageDesc">Gentle ultrasonic stain &amp; tartar removal, enamel polishing, and gum care — leaving your mouth fresh, healthy, and thoroughly checked without sensitivity stress.</p>
-          <a class="btn btn-plum" href="#book" id="stageCta" data-pick="Scaling, Polishing &amp; Gum Care">Book This Treatment on WhatsApp →</a>
+        <div class="svc-photo-body">
+          <h3>Scaling &amp; Polishing</h3>
+          <p>Gentle ultrasonic tartar and stain removal followed by smooth enamel polishing — refreshing your smile comfortably without sensitivity stress.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ 5+ Google Reviews Highlight Scaling</span>
+            <a class="svc-book-btn" href="#book" data-pick="Scaling, Polishing &amp; Gum Care">Book on WhatsApp →</a>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="pain">
+        <div class="svc-photo-media">
+          <img src="assets/svc-rootcanal-hge.jpg" alt="Painless root canal therapy and tooth saving care">
+          <span class="svc-num-badge">02</span>
+          <span class="svc-cat-badge">Tooth Saving · RCT</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Painless Root Canal &amp; Crowns</h3>
+          <p>Comfort-first root canal therapy explained clearly before starting — relieving deep tooth pain gently and restoring strength with natural-looking crowns.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ 8+ Google Reviews Praise RCT Care</span>
+            <a class="svc-book-btn" href="#book" data-pick="Painless Root Canal &amp; Crowns">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="pain">
+        <div class="svc-photo-media">
+          <img src="assets/svc-wisdom-hge.jpg" alt="Wisdom tooth extraction and X-ray guided surgical care">
+          <span class="svc-num-badge">03</span>
+          <span class="svc-cat-badge">Surgical Care</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Wisdom Tooth &amp; Gentle Extractions</h3>
+          <p>Careful X-ray assessment, calm painless anaesthesia, smooth wisdom-tooth removal, and personal healing follow-up directly from Dr. Haggie.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ 4+ Reviews Praise Wisdom Extractions</span>
+            <a class="svc-book-btn" href="#book" data-pick="Wisdom Tooth Extraction">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="preventive">
+        <div class="svc-photo-media">
+          <img src="assets/svc-gumcare-hge.jpg" alt="Gum health evaluation and gentle periodontal treatment">
+          <span class="svc-num-badge">04</span>
+          <span class="svc-cat-badge">Healthy Gums</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Gum Issues &amp; Periodontal Care</h3>
+          <p>Targeted care for bleeding, tender, or receding gums — diagnosing root causes early and guiding you with clear, practical daily home care.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ Gentle Gum Care &amp; Clear Guidance</span>
+            <a class="svc-book-btn" href="#book" data-pick="Scaling, Polishing &amp; Gum Care">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="smile">
+        <div class="svc-photo-media">
+          <img src="assets/svc-smile-hge.jpg" alt="Aesthetic tooth-colored fillings and conservative smile design">
+          <span class="svc-num-badge">05</span>
+          <span class="svc-cat-badge">Cosmetic &amp; Restorative</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Aesthetic Fillings &amp; Smile Care</h3>
+          <p>Natural tooth-shaded composite fillings, conservative enamel repairs, and smile enhancements crafted cleanly to match your natural teeth.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ Natural Shade-Matched Results</span>
+            <a class="svc-book-btn" href="#book" data-pick="Aesthetic Fillings &amp; Smile Care">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="smile">
+        <div class="svc-photo-media">
+          <img src="assets/svc-implants-hge.jpg" alt="Dental implants, crowns, and missing tooth replacement planning">
+          <span class="svc-num-badge">06</span>
+          <span class="svc-cat-badge">Tooth Replacement</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Crowns, Bridges &amp; Dental Implants</h3>
+          <p>Long-lasting zirconia crowns, fixed bridges, and natural-feeling dental implants explained transparently so you can chew and smile with total confidence.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ Honest Options &amp; Precise Fit</span>
+            <a class="svc-book-btn" href="#book" data-pick="Crowns, Bridges &amp; Dental Implants">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="family">
+        <div class="svc-photo-media">
+          <img src="assets/svc-ortho-hge.jpg" alt="Orthodontic braces and clear teeth alignment for teens and adults">
+          <span class="svc-num-badge">07</span>
+          <span class="svc-cat-badge">Teens &amp; Adults</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Braces &amp; Clear Aligners</h3>
+          <p>Comfortable orthodontic alignment options for teenagers and adults, guided patiently at every visit with clear progress check-ins.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ Step-by-Step Progress Guidance</span>
+            <a class="svc-book-btn" href="#book" data-pick="Braces &amp; Clear Aligners">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="svc-photo-card reveal" data-cat="family">
+        <div class="svc-photo-media">
+          <img src="assets/svc-kids-hge.jpg" alt="Friendly gentle kids and family dental checkup">
+          <span class="svc-num-badge">08</span>
+          <span class="svc-cat-badge">Kids &amp; Family</span>
+        </div>
+        <div class="svc-photo-body">
+          <h3>Gentle Kids &amp; Family Dentistry</h3>
+          <p>Warm, patient dental check-ups, preventive fluoride care, and gentle restorations for children, parents, and elders alike — zero fear, zero rush.</p>
+          <div class="svc-card-foot">
+            <span class="svc-praise">★ Welcoming Studio Open All 7 Days</span>
+            <a class="svc-book-btn" href="#book" data-pick="Kids &amp; Family Check-Up">Book on WhatsApp →</a>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -302,6 +444,7 @@
           <option>Painless Root Canal &amp; Crowns</option>
           <option>Wisdom Tooth Extraction</option>
           <option>Aesthetic Fillings &amp; Smile Care</option>
+          <option>Crowns, Bridges &amp; Dental Implants</option>
           <option>Braces &amp; Clear Aligners</option>
           <option>Kids &amp; Family Check-Up</option>
           <option>Toothache / Urgent Consultation</option>
@@ -347,6 +490,6 @@
   <a href="https://www.google.com/maps/dir/?api=1&amp;destination=13.0633493,77.6421945" target="_blank" rel="noopener">📍 Maps</a>
 </nav>
 <button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
-<script src="script.js?v=1"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>
