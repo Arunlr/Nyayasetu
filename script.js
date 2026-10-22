@@ -202,6 +202,6 @@ $('#bookForm').addEventListener('submit', e => {
   ok.innerHTML = `✅ Thank you, ${name.split(' ')[0]}! WhatsApp should now open with your appointment details ready — just press <b>Send</b> and the clinic will confirm your slot.<br><a class="wa-fallback" href="${url}" target="_blank" rel="noopener">WhatsApp didn’t open? Tap here to send your details →</a>`;
   ok.scrollIntoView({behavior:'smooth', block:'center'});
   const btn = e.target.querySelector('button[type="submit"]');
-  btn.textContent = '📲 Opening WhatsApp…';
-  setTimeout(() => btn.textContent = '📲 Book via WhatsApp', 2500);
+  btn.innerHTML = 'Opening WhatsApp…';
+  setTimeout(() => btn.innerHTML = '<img class="wa-ico" src="assets/whatsapp-white.svg" alt=""> Book Appointment on WhatsApp', 2500);
 });
