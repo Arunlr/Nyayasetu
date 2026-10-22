@@ -70,14 +70,14 @@ $('#seeAll').addEventListener('click', e => {
 
 /* ── Specialists: infinite auto carousel + arrows (video 13–19s) ── */
 const specialists = [
-  {img:'assets/doc-1.jpg', role:'Implantology',    bg:'#ffc9a3', desc:'Dental Implants Specialist'},
-  {img:'assets/doc-2.jpg', role:'Endodontics',     bg:'#d9d0ff', desc:'Root Canal Specialist'},
-  {img:'assets/doc-3.jpg', role:'Orthodontics',    bg:'#ffe98a', desc:'Braces & Aligners Specialist'},
-  {img:'assets/doc-4.jpg', role:'Oral Surgery',    bg:'#ffc9d9', desc:'Oral & Maxillofacial Surgeon'},
-  {img:'assets/doc-5.jpg', role:'Prosthodontics',  bg:'#c4ecff', desc:'Crowns, Bridges & Dentures'},
-  {img:'assets/doc-2.jpg', role:'Pediatric Dentistry', bg:'#ffe98a', desc:'Kids Dentistry Specialist'},
-  {img:'assets/doc-3.jpg', role:'Cosmetic Dentistry',  bg:'#d9d0ff', desc:'Smile Design & Whitening'},
-  {img:'assets/doc-1.jpg', role:'Family Dentistry',    bg:'#ffc9a3', desc:'General & Preventive Care'},
+  {img:'assets/doc-1.jpg?v=2', role:'Implantology',    bg:'#ffc9a3', desc:'Dental Implants Specialist'},
+  {img:'assets/doc-2.jpg?v=2', role:'Endodontics',     bg:'#d9d0ff', desc:'Root Canal Specialist'},
+  {img:'assets/doc-3.jpg?v=2', role:'Orthodontics',    bg:'#ffe98a', desc:'Braces & Aligners Specialist'},
+  {img:'assets/doc-4.jpg?v=2', role:'Oral Surgery',    bg:'#ffc9d9', desc:'Oral & Maxillofacial Surgeon'},
+  {img:'assets/doc-5.jpg?v=2', role:'Prosthodontics',  bg:'#c4ecff', desc:'Crowns, Bridges & Dentures'},
+  {img:'assets/doc-2.jpg?v=2', role:'Pediatric Dentistry', bg:'#ffe98a', desc:'Kids Dentistry Specialist'},
+  {img:'assets/doc-3.jpg?v=2', role:'Cosmetic Dentistry',  bg:'#d9d0ff', desc:'Smile Design & Whitening'},
+  {img:'assets/doc-1.jpg?v=2', role:'Family Dentistry',    bg:'#ffc9a3', desc:'General & Preventive Care'},
 ];
 const spTrack = $('#spTrack');
 spTrack.innerHTML = [...specialists, ...specialists].map(s => `
