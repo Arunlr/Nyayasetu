@@ -17,7 +17,7 @@
       const key = img.getAttribute('data-gimg');
       const width = img.getAttribute('data-gw') || '1200';
       const localFallback = img.getAttribute('src');
-      const hdSrc = `/api/gimg?k=${encodeURIComponent(key)}&w=${encodeURIComponent(width)}`;
+      const hdSrc = `/api/gimg?k=${encodeURIComponent(key)}&w=${encodeURIComponent(width)}&v=2`;
 
       const probe = new Image();
       probe.onload = () => {
@@ -317,7 +317,7 @@
     };
     lightboxImg.src =
       gimgKey && window.location.protocol !== 'file:'
-        ? `/api/gimg?k=${encodeURIComponent(gimgKey)}&w=1400`
+        ? `/api/gimg?k=${encodeURIComponent(gimgKey)}&w=1400&v=2`
         : localSrc;
     lightboxImg.alt = caption;
     if (lightboxCaption) lightboxCaption.textContent = caption;
