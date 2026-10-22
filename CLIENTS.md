@@ -17,4 +17,6 @@ Golden rules for EVERY client (never mix clients up):
 
 | 3 | Agape Dental Clinic (Narayanapura, Bengaluru — Dr. Samuel Shedrach) | `/agape/` | agape-dental-clinic (`prj_FmbsVdxZ5fdEc2b3aOXM0FNnI3jT`) | https://agape-dental-clinic.vercel.app | Not publicly listed — bookings via Google Maps (ask clinic) | Live — all images unique (`*-agp.jpg`), 4.8★/136 ratings, 11 AM–5 PM daily (Practo) |
 
+9. MANDATORY POST-BUILD VERIFICATION (every client, before reporting done): cross-check the finished site against the client's Google Maps listing info — exact clinic name, address + PIN, map pin coordinates (all Maps/Directions/embed links), doctor name(s), rating + rating count, hours, phone/WhatsApp, and services. Never present conflicting listing data (e.g. different hours on Practo vs Justdial) as fact — flag it on the site and to the user. Also verify: live URL serves the new images, no other client's name/number/address appears anywhere (grep), all image files referenced exist, and mobile layout works. Report the audit results to the user.
+
 New-client checklist: research Maps/Justdial/socials → create folder copy → customise branding/facts → generate full unique image set → original social icons → mobile QA → new Vercel project → deploy to production only for that project → verify live → add row above.
