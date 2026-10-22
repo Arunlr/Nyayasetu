@@ -43,7 +43,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.target.matches('[data-count]')) runCounter(e.target);
   io.unobserve(e.target);
 }), {threshold:.22});
-$$('.mask-lines, .reveal, .reveal-scale, .reveal-group, .book').forEach(el => io.observe(el));
+$$('.mask-lines, .reveal, .reveal-scale, .reveal-group, .book, .specialists, .reviews, .gallery').forEach(el => io.observe(el));
 $$('[data-count]').forEach(el => io.observe(el));
 
 /* ── Services marquee content ── */
@@ -67,6 +67,13 @@ $('#seeAll').addEventListener('click', e => {
   e.target.textContent = all ? '✳ Show Less' : '✳ See All Services';
   if (all) clearInterval(svcTimer); else cycleSvc();
 });
+
+
+/* ── Smile gallery: tilted collage strip (video outro) ── */
+$('#galTrack').innerHTML = '<span>Happy Smiles ✳ Happy Smiles ✳ Happy Smiles ✳&nbsp;</span>'.repeat(2);
+const galImgs = ['hero.jpg','kids.jpg','service-smile.jpg','help-kids-new.jpg','help-teen.jpg','service-whitening.jpg','help-adults.jpg','consult.jpg'];
+$('#galStrip').innerHTML = [...galImgs, ...galImgs].map((s,i)=>`
+  <figure class="gal-card" style="--tilt:${i%2? 3.5 : -3.5}deg"><img src="assets/${s}" alt="Happy patient smile" loading="lazy"></figure>`).join('');
 
 /* ── Specialists: infinite auto carousel + arrows (video 13–19s) ── */
 const specialists = [
@@ -141,6 +148,21 @@ rvTrack.addEventListener('pointerenter', () => clearInterval(rvTimer));
 rvTrack.addEventListener('pointerleave', resetRvTimer);
 addEventListener('resize', showRv);
 showRv();
+
+
+/* ── Touch swipe: reviews & specialists ── */
+function addSwipe(el, onLeft, onRight){
+  let x0=null;
+  el.addEventListener('touchstart', e=>{ x0=e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', e=>{
+    if(x0===null) return;
+    const dx=e.changedTouches[0].clientX-x0;
+    if(dx<-45) onLeft(); else if(dx>45) onRight();
+    x0=null;
+  }, {passive:true});
+}
+addSwipe(rvTrack, ()=>{ nextRv(); resetRvTimer(); }, ()=>{ rvI = rvI<=0? maxI(): rvI-1; showRv(); resetRvTimer(); });
+addSwipe(spTrack, ()=>{ spX -= spStep(); }, ()=>{ spX += spStep(); });
 
 /* ── Booking form: mode toggle (Online / In-person, video footer) + validation ── */
 let mode = 'In-person';
