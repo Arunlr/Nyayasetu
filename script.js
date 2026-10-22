@@ -164,7 +164,10 @@ function addSwipe(el, onLeft, onRight){
 addSwipe(rvTrack, ()=>{ nextRv(); resetRvTimer(); }, ()=>{ rvI = rvI<=0? maxI(): rvI-1; showRv(); resetRvTimer(); });
 addSwipe(spTrack, ()=>{ spX -= spStep(); }, ()=>{ spX += spStep(); });
 
-/* ── Booking form: mode toggle (Online / In-person, video footer) + validation ── */
+/* ── Booking form → WhatsApp (details sent to the dentist's WhatsApp) ── */
+const DENTIST_WHATSAPP = '919611763346'; // +91 96117 63346 — change here to update everywhere
+const waLink = msg => `https://wa.me/${DENTIST_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
 let mode = 'In-person';
 $$('.mode-toggle button').forEach(b => b.addEventListener('click', () => {
   $$('.mode-toggle button').forEach(x => x.classList.remove('is-on'));
@@ -181,8 +184,24 @@ $('#bookForm').addEventListener('submit', e => {
   if (!/^[6-9]\d{9}$/.test(phone.slice(-10))) return err.textContent = 'Please enter a valid 10-digit Indian mobile number.';
   if (!f.get('service')) return err.textContent = 'Please select a service.';
   if (!f.get('date')) return err.textContent = 'Please pick a preferred date.';
-  err.textContent = ''; ok.hidden = false;
-  ok.textContent = `✅ Thank you, ${name.split(' ')[0]}! Your ${mode.toLowerCase()} appointment request for ${f.get('service')} on ${f.get('date')} is noted. Please confirm your slot at the clinic — or use “Get Directions” above to visit us in Horamavu.`;
+  err.textContent = '';
+  const niceDate = new Date(f.get('date') + 'T00:00:00').toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+  const notes = (f.get('notes') || '').toString().trim();
+  const msg =
+`🦷 *New Appointment Request*
+— Tooth Care Speciality & Family Dental Clinic (Website)
+
+👤 *Name:* ${name}
+📞 *Phone:* +91 ${phone.slice(-10)}
+🛎️ *Service:* ${f.get('service')}
+📅 *Preferred Date:* ${niceDate}
+🏥 *Mode:* ${mode}` + (notes ? `\n📝 *Notes:* ${notes}` : '') + `\n\nPlease confirm my appointment slot. Thank you!`;
+  const url = waLink(msg);
+  window.open(url, '_blank', 'noopener'); // opens WhatsApp (app/web) with details pre-filled — patient just taps Send
+  ok.hidden = false;
+  ok.innerHTML = `✅ Thank you, ${name.split(' ')[0]}! WhatsApp should now open with your appointment details ready — just press <b>Send</b> and the clinic will confirm your slot.<br><a class="wa-fallback" href="${url}" target="_blank" rel="noopener">WhatsApp didn’t open? Tap here to send your details →</a>`;
   ok.scrollIntoView({behavior:'smooth', block:'center'});
-  e.target.querySelector('button[type="submit"]').textContent = 'Request Noted ✓';
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = '📲 Opening WhatsApp…';
+  setTimeout(() => btn.textContent = '📲 Book via WhatsApp', 2500);
 });
