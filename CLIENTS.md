@@ -15,4 +15,6 @@ Golden rules for EVERY client (never mix clients up):
 | 1 | Tooth Care Speciality & Family Dental Clinic (Horamavu) | `/` (root) | tooth-care-speciality-family-dental (`prj_2WIyZa6h109WeKrXl5ERFSAuvUIb`) | https://tooth-care-speciality-family-dental.vercel.app | +91 96117 63346 | Live |
 | 2 | Dentimax Dental Clinic (Kothanur) | `/dentimax/` | dentimax-dental-clinic (`prj_XWmAJPk9S0KwsSJdjr2QciE0cFpv`) | https://dentimax-dental-clinic.vercel.app | +91 96065 68169 | Live — all images unique (`*-dmx.jpg`) |
 
+| 3 | Agape Dental Clinic (Narayanapura, Bengaluru — Dr. Samuel Shedrach) | `/agape/` | agape-dental-clinic (`prj_FmbsVdxZ5fdEc2b3aOXM0FNnI3jT`) | https://agape-dental-clinic.vercel.app | Not publicly listed — bookings via Google Maps (ask clinic) | Live — all images unique (`*-agp.jpg`), 4.8★/136 ratings, 11 AM–5 PM daily (Practo) |
+
 New-client checklist: research Maps/Justdial/socials → create folder copy → customise branding/facts → generate full unique image set → original social icons → mobile QA → new Vercel project → deploy to production only for that project → verify live → add row above.
