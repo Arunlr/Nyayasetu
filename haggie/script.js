@@ -37,12 +37,14 @@ function runCounter(el){
     el.textContent = el.dataset.decimal + (el.dataset.suffix || '');
     return;
   }
-  const target = +el.dataset.count, suffix = el.dataset.suffix || '', t0 = performance.now(), dur = 1500;
-  (function tick(t){
-    const p = Math.min((t - t0) / dur, 1);
+  const target = +el.dataset.count, suffix = el.dataset.suffix || '', dur = 1500;
+  let t0 = null;
+  requestAnimationFrame(function tick(t){
+    if (t0 === null) t0 = t;
+    const p = Math.max(0, Math.min((t - t0) / dur, 1));
     el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString('en-IN') + suffix;
     if (p < 1) requestAnimationFrame(tick);
-  })(t0);
+  });
 }
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
