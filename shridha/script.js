@@ -110,19 +110,32 @@
     el.dataset.counted = '1';
     const target = parseFloat(el.dataset.counter || '0');
     const decimals = parseInt(el.dataset.decimals || '0', 10);
-    const dur = 1100;
-    let t0 = null;
+    const finalStr = decimals > 0 ? target.toFixed(decimals) : String(target);
 
-    function tick(now) {
-      if (t0 === null) t0 = now;
-      const p = Math.min(1, Math.max(0, (now - t0) / dur));
+    if (
+      document.visibilityState === 'hidden' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      el.textContent = finalStr;
+      return;
+    }
+
+    const dur = 850;
+    const startMs = Date.now();
+    const safetyTimer = setTimeout(() => {
+      el.textContent = finalStr;
+    }, dur + 120);
+
+    function tick() {
+      const p = Math.min(1, Math.max(0.15, (Date.now() - startMs) / dur));
       const eased = 1 - Math.pow(1 - p, 3);
       const val = target * eased;
       el.textContent = decimals > 0 ? val.toFixed(decimals) : String(Math.round(val));
       if (p < 1) {
         requestAnimationFrame(tick);
       } else {
-        el.textContent = decimals > 0 ? target.toFixed(decimals) : String(target);
+        clearTimeout(safetyTimer);
+        el.textContent = finalStr;
       }
     }
 
