@@ -144,6 +144,7 @@
 
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-reveal');
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -154,9 +155,18 @@
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.02, rootMargin: '0px 0px 80px 0px' }
     );
     revealEls.forEach((el) => io.observe(el));
+
+    // Guarantee nothing ever stays hidden in iframes, fast scrolls, or tall viewports
+    setTimeout(() => {
+      document.documentElement.classList.remove('js-reveal');
+      revealEls.forEach((el) => {
+        el.classList.add('is-visible');
+        el.querySelectorAll('[data-counter]').forEach(runCounter);
+      });
+    }, 1200);
   } else {
     revealEls.forEach((el) => el.classList.add('is-visible'));
     document.querySelectorAll('[data-counter]').forEach(runCounter);
