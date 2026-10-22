@@ -18,10 +18,10 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
 .intro-card{position:absolute;width:min(300px,42vw);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px rgba(90,30,5,.35);background:#fff}
 .intro-card img{height:170px;width:100%;object-fit:cover}
 .intro-card span{display:block;padding:.5rem .8rem;font-weight:600;color:var(--brown)}
-.ic1{transform:rotate(-9deg) translate(-46vw,-16vh) scale(.9);animation:flyIn 1.1s var(--ease) both}
-.ic2{transform:rotate(7deg) translate(44vw,-20vh);animation:flyIn 1.1s .1s var(--ease) both}
-.ic3{transform:rotate(6deg) translate(-42vw,26vh);animation:flyIn 1.1s .2s var(--ease) both}
-.ic4{transform:rotate(-7deg) translate(46vw,24vh);animation:flyIn 1.1s .3s var(--ease) both}
+.ic1{transform:rotate(-9deg) translate(-23vw,-15vh) scale(.95);animation:flyIn 1.1s var(--ease) both}
+.ic2{transform:rotate(7deg) translate(22vw,-17vh);animation:flyIn 1.1s .1s var(--ease) both}
+.ic3{transform:rotate(6deg) translate(-22vw,19vh);animation:flyIn 1.1s .2s var(--ease) both}
+.ic4{transform:rotate(-7deg) translate(23vw,18vh);animation:flyIn 1.1s .3s var(--ease) both}
 @keyframes flyIn{from{opacity:0;scale:.6}to{opacity:1}}
 @keyframes introLogo{from{opacity:0;transform:translateY(40px) scale(.9)}to{opacity:1}}
 @keyframes introOut{to{opacity:0;visibility:hidden;transform:scale(1.12)}}
@@ -333,6 +333,10 @@ label.full{margin-bottom:.4rem}
   .foot-base{flex-direction:column;gap:.4rem}
   .gal-card{width:180px}.gal-card img{height:130px}
   .intro-card{width:44vw}.intro-card img{height:110px}
+  .ic1{transform:rotate(-9deg) translate(-17vw,-13vh) scale(.95)}
+  .ic2{transform:rotate(7deg) translate(16vw,-15vh)}
+  .ic3{transform:rotate(6deg) translate(-16vw,15vh)}
+  .ic4{transform:rotate(-7deg) translate(17vw,14vh)}
   .menu-overlay nav a{font-size:2rem}
   .arrows button{width:48px;height:48px}
 }
