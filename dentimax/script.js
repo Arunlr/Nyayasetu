@@ -71,20 +71,20 @@ $('#seeAll').addEventListener('click', e => {
 
 /* ── Smile gallery: tilted collage strip (video outro) ── */
 $('#galTrack').innerHTML = '<span>Happy Smiles ✳ Happy Smiles ✳ Happy Smiles ✳&nbsp;</span>'.repeat(2);
-const galImgs = ['hero-dmx.jpg','svc-kids-dmx.jpg','svc-braces-dmx.jpg','help-kids-dmx.jpg','help-teen-dmx.jpg','svc-laser-dmx.jpg','help-adults.jpg','consult-dmx.jpg'];
+const galImgs = ['hero-woman-dmx.jpg','svc-kids-dmx.jpg','svc-braces-dmx.jpg','help-kids-dmx.jpg','help-teen-dmx.jpg','svc-laser-dmx.jpg','help-adults-dmx.jpg','consult-dmx.jpg'];
 $('#galStrip').innerHTML = [...galImgs, ...galImgs].map((s,i)=>`
   <figure class="gal-card" style="--tilt:${i%2? 3.5 : -3.5}deg"><img src="assets/${s}" alt="Happy patient smile" loading="lazy"></figure>`).join('');
 
 /* ── Specialists: infinite auto carousel + arrows (video 13–19s) ── */
 const specialists = [
-  {img:'assets/doc-1.jpg?v=2', role:'Implant & Maxillofacial', bg:'#ffc9a3', desc:'Clinical Director — Implants & Facial Surgery'},
-  {img:'assets/doc-2.jpg?v=2', role:'Endodontics',     bg:'#d9d0ff', desc:'Dr. Praveen — Painless Root Canal'},
-  {img:'assets/doc-3.jpg?v=2', role:'Orthodontics',    bg:'#ffe98a', desc:'Clear Braces & Invisalign'},
-  {img:'assets/doc-4.jpg?v=2', role:'Oral Surgery',    bg:'#ffc9d9', desc:'Oral & Maxillofacial Surgeon'},
-  {img:'assets/doc-5.jpg?v=2', role:'General Dentistry', bg:'#c4ecff', desc:'Dr. Shefalika — Family & Kids Care'},
-  {img:'assets/doc-2.jpg?v=2', role:'Pediatric Dentistry', bg:'#ffe98a', desc:'Kids Dentistry Specialist'},
-  {img:'assets/doc-3.jpg?v=2', role:'Cosmetic Dentistry',  bg:'#d9d0ff', desc:'Smile Design & Whitening'},
-  {img:'assets/doc-1.jpg?v=2', role:'Family Dentistry',    bg:'#ffc9a3', desc:'General & Preventive Care'},
+  {img:'assets/doc-1-dmx.jpg', role:'Implant & Maxillofacial', bg:'#ffc9a3', desc:'Clinical Director — Implants & Facial Surgery'},
+  {img:'assets/doc-2-dmx.jpg', role:'Endodontics',     bg:'#d9d0ff', desc:'Dr. Praveen — Painless Root Canal'},
+  {img:'assets/doc-3-dmx.jpg', role:'Orthodontics',    bg:'#ffe98a', desc:'Clear Braces & Invisalign'},
+  {img:'assets/doc-4-dmx.jpg', role:'Oral Surgery',    bg:'#ffc9d9', desc:'Oral & Maxillofacial Surgeon'},
+  {img:'assets/doc-5-dmx.jpg', role:'General Dentistry', bg:'#c4ecff', desc:'Dr. Shefalika — Family & Kids Care'},
+  {img:'assets/doc-2-dmx.jpg', role:'Pediatric Dentistry', bg:'#ffe98a', desc:'Kids Dentistry Specialist'},
+  {img:'assets/doc-3-dmx.jpg', role:'Cosmetic Dentistry',  bg:'#d9d0ff', desc:'Smile Design & Whitening'},
+  {img:'assets/doc-1-dmx.jpg', role:'Family Dentistry',    bg:'#ffc9a3', desc:'General & Preventive Care'},
 ];
 const spTrack = $('#spTrack');
 spTrack.innerHTML = [...specialists, ...specialists].map(s => `
