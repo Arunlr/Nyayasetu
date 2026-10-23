@@ -8,31 +8,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
-  <!-- Scroll progress hairline -->
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-  <!-- Top Clinical Utility Ribbon -->
-  <div class="utility-bar">
-    <div class="container utility-inner">
-      <div class="utility-hours">
-        <span class="live-dot" id="liveClinicDot" aria-hidden="true"></span>
-        <span id="liveClinicStatus">Mon–Sat 10:00 AM – 8:00 PM · Sun 10:00 AM – 1:00 PM</span>
-      </div>
-      <div class="utility-links">
-        <a href="mailto:shridhadental@gmail.com" class="util-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          <span>shridhadental@gmail.com</span>
-        </a>
-        <span class="util-sep" aria-hidden="true">·</span>
-        <a href="tel:+918904027171" class="util-link util-phone">+91 89040 27171</a>
-      </div>
+  <!-- ══════════ 1. OPENING INTRO COLLAGE CURTAIN (4 Tilted Flying Cards + Zoom-Out) ══════════ -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-card ic1">
+      <img src="assets/hero-woman-shr.jpg" alt="" />
+      <span>Healthy Smiles ✦</span>
+    </div>
+    <div class="intro-card ic2">
+      <img src="assets/gs-home-7.jpg" data-gimg="home-7" data-gw="720" alt="" />
+      <span>Shridha Dental Clinic</span>
+    </div>
+    <div class="intro-card ic3">
+      <img src="assets/srv-oral-medicine-shr.jpg" alt="" />
+      <span>Oral Medicine &amp; TMJ</span>
+    </div>
+    <div class="intro-card ic4">
+      <img src="assets/srv-decay-rct-shr.jpg" alt="" />
+      <span>Painless Root Canal</span>
+    </div>
+    <div class="intro-logo">
+      <span>Shridha</span> <b>Dental</b>
     </div>
   </div>
 
-  <!-- Sticky Architectural Header -->
+  <!-- Scroll Progress Hairline -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ══════════ 2. STICKY ARCHITECTURAL HEADER + CIRCULAR CLIP OVERLAY MENU ══════════ -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a href="#top" class="brand" aria-label="Shridha Dental Clinic Home">
@@ -48,218 +53,182 @@
         </span>
         <span class="brand-text">
           <span class="brand-name">Shridha Dental Clinic</span>
-          <span class="brand-sub">Centre for Comprehensive Oral Health · K. Narayanapura</span>
+          <span class="brand-sub" id="liveClinicStatus">Mon–Sat 10 AM – 8 PM · Sun 10 AM – 1 PM</span>
         </span>
       </a>
 
       <nav class="main-nav" aria-label="Primary Navigation">
-        <a href="#services">Services</a>
-        <a href="#about">About Clinic</a>
-        <a href="#doctors">Doctors</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Hours &amp; Map</a>
+        <a href="#services">SERVICES</a>
+        <a href="#specialists">SPECIALISTS</a>
+        <a href="#about">CLINIC</a>
+        <a href="#reviews">REVIEWS</a>
+        <a href="#contact">VISIT</a>
       </nav>
 
       <div class="header-actions">
         <a href="tel:+918904027171" class="btn btn-outline btn-sm desktop-call">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>089040 27171</span>
         </a>
-        <button type="button" class="btn btn-primary btn-sm" data-open-book="General Dental Consultation">
+        <a href="#book" class="btn btn-gold btn-sm">
           <span>Book Visit</span>
-        </button>
-        <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNavDrawer" aria-label="Open Navigation Menu">
-          <span></span><span></span><span></span>
+        </a>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menuOverlay" aria-label="Open Navigation Menu">
+          <span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <div class="mobile-nav-drawer" id="mobileNavDrawer" hidden>
-    <div class="mobile-nav-backdrop" data-close-nav></div>
-    <div class="mobile-nav-panel">
-      <div class="mobile-nav-head">
-        <div class="brand-mini">
-          <img src="assets/gs-home-0.jpg" data-gimg="home-0" data-gw="360" alt="Shridha Dental Clinic" width="44" height="31" />
-          <div>
-            <strong>Shridha Dental Clinic</strong>
-            <span>LBS Nagar · K. Narayanapura</span>
-          </div>
-        </div>
-        <button type="button" class="icon-close" data-close-nav aria-label="Close Menu">&times;</button>
-      </div>
-      <nav class="mobile-nav-links" aria-label="Mobile Navigation">
-        <a href="#services" data-close-nav>Our Dental Services (8)</a>
-        <a href="#about" data-close-nav>About &amp; Sterilization</a>
-        <a href="#doctors" data-close-nav>Dr. Veena &amp; Dr. Sudhindra</a>
-        <a href="#gallery" data-close-nav>Inside Shridha Gallery</a>
-        <a href="#reviews" data-close-nav>5.0 ★ Patient Reviews</a>
-        <a href="#contact" data-close-nav>Location, Hours &amp; Map</a>
-      </nav>
-      <div class="mobile-nav-cta">
-        <a href="tel:+918904027171" class="btn btn-outline btn-block">Call +91 89040 27171</a>
-        <button type="button" class="btn btn-whatsapp btn-block" data-open-book="General Dental Consultation">
-          <img src="assets/whatsapp-white.svg" alt="" width="18" height="18" />
-          <span>Book on WhatsApp</span>
-        </button>
-      </div>
-    </div>
+  <!-- Full-Screen Circular Clip-Path Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <button type="button" class="menu-close" id="menuClose" aria-label="Close Menu">&times;</button>
+    <nav aria-label="Full Screen Navigation">
+      <a href="#top"><em>01</em>Home</a>
+      <a href="#services"><em>02</em>Our Services (8)</a>
+      <a href="#specialists"><em>03</em>Dr. Veena &amp; Dr. Sudhindra</a>
+      <a href="#about"><em>04</em>Inside Our Clinic</a>
+      <a href="#reviews"><em>05</em>5.0 ★ Reviews</a>
+      <a href="#book"><em>06</em>Book Appointment</a>
+      <a href="#contact"><em>07</em>Hours &amp; Map</a>
+    </nav>
+    <p>SHRIDHA DENTAL CLINIC · Kanasu Complex, LBS Nagar, K. Narayanapura, Bengaluru · +91 89040 27171</p>
   </div>
 
   <main id="top">
-    <!-- =================================================================
-         HERO — Backlit Architectural Cove & Healthy Smile Portrait
-    ================================================================== -->
-    <section class="hero-section">
-      <div class="hero-ambient" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow-pill reveal">
-            <span class="pill-star" aria-hidden="true">★ 5.0</span>
-            <span>34 Verified Google Reviews · K. Narayanapura, Bengaluru</span>
-          </div>
+    <!-- ══════════ 3. FULL-BLEED CINEMATIC HERO + PARALLAX + SPINNING BADGE + MARQUEE ══════════ -->
+    <section class="hero">
+      <div class="hero-media">
+        <img
+          id="heroImg"
+          src="assets/hero-woman-shr.jpg"
+          alt="Radiant healthy smile at Shridha Dental Clinic in K. Narayanapura, Bengaluru"
+          width="1376"
+          height="768"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
 
-          <h1 class="hero-title mask-lines">
-            <span>Everyone deserves&nbsp;</span>
-            <span><em>a Healthy Smile.</em></span>
+      <div class="container hero-content">
+        <div class="hero-main-col">
+          <div class="hero-pill">
+            <span class="live-dot" id="liveClinicDot" aria-hidden="true"></span>
+            <span>5.0 ★ Rated (34 Google Reviews) · K. Narayanapura, Bengaluru</span>
+          </div>
+          <h1 class="mask-lines inview">
+            <span class="ml"><span>Everyone Deserves</span></span>
+            <span class="ml"><span><em>a Healthy Smile.</em></span></span>
           </h1>
-
-          <p class="hero-lead reveal">
-            Welcome to <strong>Shridha Dental Clinic — Centre for Comprehensive Oral Health</strong>. Led by
-            <strong>Dr. Veena S. Narayanan</strong> (Oral Medicine &amp; Radiology Specialist) and
-            <strong>Dr. Sudhindra</strong>, we deliver painless restorations, implants, oral medicine diagnostics,
-            laser gum therapy, clear aligners, and gentle family care at transparent fees.
-          </p>
-
-          <div class="hero-cta-row reveal">
-            <button type="button" class="btn btn-primary btn-lg" data-open-book="Comprehensive Dental Checkup">
-              <span>Schedule an Appointment</span>
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-            <a href="#services" class="btn btn-outline btn-lg">
-              <span>Explore Our Services</span>
-            </a>
-          </div>
-
-          <div class="hero-trust-strip reveal">
-            <div class="trust-stat">
-              <div class="trust-num"><span data-counter="5.0" data-decimals="1">5.0</span><span class="trust-accent">★</span></div>
-              <span class="trust-label">Rated on Google (34)</span>
-            </div>
-            <div class="trust-divider" aria-hidden="true"></div>
-            <div class="trust-stat">
-              <div class="trust-num"><span data-counter="22">22</span><span class="trust-accent">+</span></div>
-              <span class="trust-label">Yrs Specialist Experience</span>
-            </div>
-            <div class="trust-divider" aria-hidden="true"></div>
-            <div class="trust-stat">
-              <div class="trust-num"><span data-counter="8">8</span></div>
-              <span class="trust-label">Specialty Services</span>
-            </div>
-            <div class="trust-divider" aria-hidden="true"></div>
-            <div class="trust-stat">
-              <div class="trust-num"><span data-counter="7">7</span><span class="trust-accent">d</span></div>
-              <span class="trust-label">Open incl. Sun 10–1</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Architectural Cove Visual: Woman's Healthy Smile + Real Backlit Clinic Wall Sign -->
-        <div class="hero-stage reveal">
-          <div class="hero-cove-frame">
-            <img
-              src="assets/hero-woman-shr.jpg"
-              alt="Radiant healthy smile care at Shridha Dental Clinic in K. Narayanapura, Bengaluru"
-              class="hero-main-photo"
-              width="1376"
-              height="768"
-              fetchpriority="high"
-            />
-            <div class="hero-photo-gradient" aria-hidden="true"></div>
-            <div class="hero-photo-caption">
-              <span class="caption-kicker">Kanasu Complex · LBS Nagar</span>
-              <p>Gentle, stress-free care under strict sterilization protocols</p>
-            </div>
-          </div>
-
-          <!-- Real Shridha Clinic Backlit Reception Crest Photo -->
-          <div class="hero-clinic-card">
+          <div class="hero-clinic-inset">
             <img
               src="assets/gs-home-7.jpg"
               data-gimg="home-7"
               data-gw="720"
-              alt="Shridha Dental Clinic backlit wall crest — Centre for Comprehensive Oral Health"
-              width="280"
-              height="196"
+              alt="Shridha Dental Clinic backlit wall sign — Centre for Comprehensive Oral Health"
+              width="120"
+              height="84"
             />
-            <div class="hero-clinic-card-body">
-              <span class="mini-badge">Centre for Oral Health</span>
-              <strong>Shridha Dental Clinic, Bengaluru</strong>
-              <span>Mon–Sat 10 AM – 8 PM · Sun 10 AM – 1 PM</span>
+            <div>
+              <strong>Centre for Comprehensive Oral Health</strong>
+              <span>Led by Dr. Veena S. Narayanan &amp; Dr. Sudhindra · Open All 7 Days</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- =================================================================
-         SIGNATURE CLINICAL RIBBON
-    ================================================================== -->
-    <section class="clinical-ribbon" aria-label="Core Clinical Commitments">
-      <div class="container ribbon-grid">
-        <div class="ribbon-item">
-          <span class="ribbon-icon" aria-hidden="true">01</span>
-          <div>
-            <strong>Specialist Oral Diagnosis</strong>
-            <span>Oral lesions, TMJ &amp; orofacial pain evaluated at the root</span>
+        <div class="hero-side">
+          <div class="badge-rotor" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <path id="shrCirc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
+              </defs>
+              <text>
+                <textPath href="#shrCirc">SHRIDHA DENTAL CLINIC • 5.0★ ORAL HEALTH • </textPath>
+              </text>
+            </svg>
+            <span class="badge-tooth">🦷</span>
+          </div>
+
+          <p class="hero-copy">
+            Specialist oral medicine &amp; TMJ diagnostics, painless root canals, implants, laser gum therapy, clear aligners, and gentle family dentistry under strict sterilization protocols.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#book" class="btn btn-gold btn-lg">Book Appointment</a>
+            <a href="#services" class="btn btn-ghost btn-lg">Explore Services ↓</a>
           </div>
         </div>
-        <div class="ribbon-item">
-          <span class="ribbon-icon" aria-hidden="true">02</span>
-          <div>
-            <strong>Strict Autoclave Sterilization</strong>
-            <span>Sealed instrument protocols in spotless treatment suites</span>
-          </div>
-        </div>
-        <div class="ribbon-item">
-          <span class="ribbon-icon" aria-hidden="true">03</span>
-          <div>
-            <strong>Laser &amp; Painless Dentistry</strong>
-            <span>Laser gum care, precision RCT, implants &amp; clear aligners</span>
-          </div>
-        </div>
-        <div class="ribbon-item">
-          <span class="ribbon-icon" aria-hidden="true">04</span>
-          <div>
-            <strong>Honest, Reasonable Fees</strong>
-            <span>Clear explanation of every option before treatment begins</span>
-          </div>
+      </div>
+
+      <!-- Infinite Scrolling Hero Ticker -->
+      <div class="hero-ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>ORAL MEDICINE &amp; TMJ CARE ✦ PAINLESS ROOT CANAL (RCT) ✦ LASER GUM THERAPY ✦ IMPLANTS &amp; CROWNS ✦ CLEAR ALIGNERS ✦ TEETH WHITENING ✦ WISDOM TOOTH SURGERY ✦ KIDS DENTISTRY ✦&nbsp;</span>
+          <span>ORAL MEDICINE &amp; TMJ CARE ✦ PAINLESS ROOT CANAL (RCT) ✦ LASER GUM THERAPY ✦ IMPLANTS &amp; CROWNS ✦ CLEAR ALIGNERS ✦ TEETH WHITENING ✦ WISDOM TOOTH SURGERY ✦ KIDS DENTISTRY ✦&nbsp;</span>
         </div>
       </div>
     </section>
 
-    <!-- =================================================================
-         OUR DENTAL SERVICES — All 8 Clinic Services with Dedicated Custom Photos
-    ================================================================== -->
+    <!-- ══════════ 4. CURVED SHEET OVERLAP MISSION & ANIMATED COUNTERS ══════════ -->
+    <section class="transform-band">
+      <div class="container center">
+        <span class="kicker-light reveal">Centre for Comprehensive Oral Health</span>
+        <h2 class="mask-lines center">
+          <span class="ml"><span>Personalized Care Under</span></span>
+          <span class="ml"><span>Strict <em>Sterilization</em> ✦ Gentle</span></span>
+          <span class="ml"><span>&amp; Stress-Free</span></span>
+        </h2>
+        <p class="transform-copy reveal">
+          “We, at Shridha Dental Clinic, are dedicated to providing quality dental care and improving your oral health. You are the core of our health mission and we strive to provide personalized treatment at a reasonable cost in a gentle, stress-free, relaxed environment.”
+        </p>
+        <a class="phone-inline-cta reveal" href="tel:+918904027171">
+          Call Direct: <b>+91 89040 27171</b> · Kanasu Complex, LBS Nagar, K. Narayanapura
+        </a>
+
+        <div class="stats-ledger reveal-group">
+          <div class="stat-box">
+            <strong data-decimal="5.0" data-suffix="★">5.0★</strong>
+            <span>34 Verified Google Reviews</span>
+          </div>
+          <div class="stat-box">
+            <strong data-count="22" data-suffix="+">0+</strong>
+            <span>Years Specialist Leadership</span>
+          </div>
+          <div class="stat-box">
+            <strong data-count="8" data-suffix="">0</strong>
+            <span>Clinical Dental Departments</span>
+          </div>
+          <div class="stat-box">
+            <strong data-count="7" data-suffix=" Days">0 Days</strong>
+            <span>Open incl. Sun 10 AM – 1 PM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 5. PROMINENT OUR DENTAL SERVICES (Giant Marquee + 8 Custom Photo Cards) ══════════ -->
     <section class="section services-section" id="services">
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="servicesMarquee">
+          <span>Our Dental Services ✦ Comprehensive Oral Health ✦ Our Dental Services ✦&nbsp;</span>
+          <span>Our Dental Services ✦ Comprehensive Oral Health ✦ Our Dental Services ✦&nbsp;</span>
+        </div>
+      </div>
+
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head">
           <div>
-            <span class="section-kicker">Our Dental Services</span>
+            <span class="section-kicker reveal">All 8 Clinic Specialties</span>
             <h2 class="section-title mask-lines">
-              <span>Comprehensive Treatments&nbsp;</span>
-              <span><em>Tailored to Every Smile.</em></span>
+              <span class="ml"><span>Complete Dental Treatments</span></span>
+              <span class="ml"><span><em>Matched to Every Need.</em></span></span>
             </h2>
           </div>
-          <p class="section-desc">
-            Every treatment department at Shridha Dental Clinic combines thorough diagnosis, modern laser and
-            restorative technology, and unhurried chairside comfort for children, adults, and seniors.
+          <p class="section-desc reveal">
+            Every clinical department from Shridha Dental Clinic — combining specialist oral diagnosis, laser periodontal care, micro-endodontics, prosthodontics, orthodontics, surgery, and kids dentistry.
           </p>
         </div>
 
-        <!-- Interactive Category Filter Pills -->
+        <!-- Interactive Category Filter Tabs -->
         <div class="dept-filters reveal" role="tablist" aria-label="Filter Dental Services">
           <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">All 8 Services</button>
           <button type="button" class="filter-chip" data-filter="restorative" role="tab" aria-selected="false">Root Canal, Fillings &amp; Implants</button>
@@ -268,43 +237,43 @@
           <button type="button" class="filter-chip" data-filter="surgical" role="tab" aria-selected="false">Wisdom Tooth Surgery &amp; Kids</button>
         </div>
 
-        <!-- 8 Dedicated Service Photo Cards -->
-        <div class="services-grid" id="servicesGrid">
-          <!-- Service 01: Root Canal & Tooth-Colored Fillings -->
-          <article class="service-card reveal" data-cat="restorative">
+        <!-- 8 Photo-Rich Service Cards with Photo Curtain Reveal + Hover Zoom -->
+        <div class="services-grid reveal-group" id="servicesGrid">
+          <!-- 01 -->
+          <article class="service-card" data-cat="restorative">
             <div class="service-media">
               <img
                 src="assets/srv-decay-rct-shr.jpg"
-                alt="Root Canal Treatment and Tooth-Colored Restorations at Shridha Dental Clinic"
+                alt="Root Canal Treatment and Tooth-Colored Fillings at Shridha Dental Clinic"
                 loading="eager"
-                width="1376"
+                width="1408"
                 height="768"
               />
-              <span class="dept-num">01 · Tooth Decay Care</span>
+              <span class="dept-num">01 · Tooth Decay</span>
             </div>
             <div class="service-body">
               <span class="service-dept-tag">Management of Tooth Decay</span>
               <h3>Root Canal &amp; Tooth-Colored Fillings</h3>
-              <p>Painless endodontic root canal therapy and natural shade-matched composite restorations designed to save your natural tooth.</p>
+              <p>Painless endodontic root canal therapy and natural shade-matched composite fillings crafted to preserve your natural tooth.</p>
               <ul class="treatment-list">
                 <li>Painless Root Canal Treatment (RCT)</li>
-                <li>Natural tooth-colored composite restorations</li>
+                <li>Tooth-colored composite restorations</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Root Canal & Tooth-Colored Fillings">
+              <a href="#book" class="card-book-btn" data-pick="Root Canal &amp; Tooth-Colored Fillings">
                 <span>Book RCT / Filling Visit</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 02: Dental Implants, Crowns & Bridges -->
-          <article class="service-card reveal" data-cat="restorative">
+          <!-- 02 -->
+          <article class="service-card" data-cat="restorative">
             <div class="service-media">
               <img
                 src="assets/srv-implants-crowns-shr.jpg"
-                alt="Dental Implants, Crowns, Bridges, and Removable Dentures at Shridha Dental Clinic"
+                alt="Dental Implants, Crowns, Bridges, and Dentures at Shridha Dental Clinic"
                 loading="eager"
-                width="1376"
+                width="1408"
                 height="768"
               />
               <span class="dept-num">02 · Tooth Replacement</span>
@@ -314,25 +283,25 @@
               <h3>Dental Implants, Crowns &amp; Bridges</h3>
               <p>Precision ceramic caps, fixed bridges, titanium tooth implants, and comfortable dentures engineered for natural bite strength.</p>
               <ul class="treatment-list">
-                <li>Crown &amp; Bridge restorations and cap fixation</li>
+                <li>Crown &amp; Bridge restorations &amp; cap fixation</li>
                 <li>Titanium tooth implants</li>
-                <li>Comfortable removable dentures</li>
+                <li>Removable complete &amp; partial dentures</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Dental Implants, Crowns & Bridges">
+              <a href="#book" class="card-book-btn" data-pick="Dental Implants, Crowns &amp; Bridges">
                 <span>Book Crown / Implant Consult</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 03: Oral Medicine, TMJ & Lesion Diagnosis -->
-          <article class="service-card service-card-featured reveal" data-cat="diagnostic">
+          <!-- 03 -->
+          <article class="service-card service-card-featured" data-cat="diagnostic">
             <div class="service-media">
               <img
                 src="assets/srv-oral-medicine-shr.jpg"
-                alt="Specialist Oral Medicine, TMJ Disorder, and Oral Lesion Diagnosis by Dr. Veena S. Narayanan"
+                alt="Oral Medicine, Premalignant Lesion Screening, TMJ, and Orofacial Pain Care"
                 loading="eager"
-                width="1376"
+                width="1408"
                 height="768"
               />
               <span class="dept-num">03 · Specialist Dept</span>
@@ -341,55 +310,55 @@
             <div class="service-body">
               <span class="service-dept-tag">Management of Oral Disease</span>
               <h3>Oral Medicine, TMJ &amp; Pain Diagnosis</h3>
-              <p>Specialist evaluation of oral mucosal conditions, jaw joint pain, and early preventive screening led by an Oral Medicine professor.</p>
+              <p>Specialist mucosal diagnosis, jaw joint disorder care, and preventive oral screening led by an experienced Oral Medicine professor.</p>
               <ul class="treatment-list">
-                <li>Diagnosis &amp; care of premalignant oral lesions</li>
+                <li>Premalignant oral lesion diagnosis &amp; care</li>
                 <li>Screening for oral malignant lesions</li>
-                <li>Temporomandibular joint (TMJ) disorders</li>
-                <li>Soft tissue lesions &amp; Orofacial pain management</li>
+                <li>Temporomandibular joint (TMJ) diseases</li>
+                <li>Soft tissue lesions &amp; Orofacial pain care</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Oral Medicine, TMJ & Oral Screening">
+              <a href="#book" class="card-book-btn" data-pick="Oral Medicine, TMJ &amp; Oral Screening">
                 <span>Book Specialist Diagnosis</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 04: Laser Gum Care & Teeth Cleaning -->
-          <article class="service-card reveal" data-cat="diagnostic">
+          <!-- 04 -->
+          <article class="service-card" data-cat="diagnostic">
             <div class="service-media">
               <img
                 src="assets/srv-laser-gum-shr.jpg"
                 alt="Laser Gum Therapy and Ultrasonic Teeth Cleaning at Shridha Dental Clinic"
                 loading="eager"
-                width="1376"
+                width="1408"
                 height="768"
               />
-              <span class="dept-num">04 · Gum &amp; Laser Care</span>
+              <span class="dept-num">04 · Gum &amp; Laser</span>
             </div>
             <div class="service-body">
               <span class="service-dept-tag">Management of Periodontal Disease</span>
               <h3>Laser Gum Care &amp; Teeth Cleaning</h3>
               <p>Gentle ultrasonic scaling, stain removal, and modern laser-assisted periodontal therapy for healthy, non-bleeding gums.</p>
               <ul class="treatment-list">
-                <li>Periodontal gum therapy (Laser &amp; non-Laser)</li>
-                <li>Ultrasonic oral prophylaxis (Tooth cleaning &amp; polishing)</li>
+                <li>Periodontal therapy (Laser &amp; non-Laser)</li>
+                <li>Oral prophylaxis (Ultrasonic tooth cleaning)</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Laser Gum Care & Teeth Cleaning">
-                <span>Book Laser Gum / Cleaning Visit</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+              <a href="#book" class="card-book-btn" data-pick="Laser Gum Care &amp; Teeth Cleaning">
+                <span>Book Laser Gum / Cleaning</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 05: Braces & Clear Aligners -->
-          <article class="service-card reveal" data-cat="cosmetic">
+          <!-- 05 -->
+          <article class="service-card" data-cat="cosmetic">
             <div class="service-media">
               <img
                 src="assets/srv-aligners-braces-shr.jpg"
-                alt="Orthodontic Braces and Clear Aligners at Shridha Dental Clinic"
+                alt="Braces and Clear Aligners at Shridha Dental Clinic"
                 loading="lazy"
-                width="1376"
+                width="1408"
                 height="768"
               />
               <span class="dept-num">05 · Orthodontics</span>
@@ -397,53 +366,53 @@
             <div class="service-body">
               <span class="service-dept-tag">Management of Malposed Teeth</span>
               <h3>Braces &amp; Clear Aligners</h3>
-              <p>Guided tooth straightening and bite alignment for teens and working adults using precision braces or discreet clear aligners.</p>
+              <p>Guided tooth straightening and bite alignment for teens and adults using precision braces or discreet removable clear aligners.</p>
               <ul class="treatment-list">
                 <li>Discreet removable Clear Aligners</li>
                 <li>Orthodontic therapy (Metal &amp; ceramic braces)</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Braces & Clear Aligners">
+              <a href="#book" class="card-book-btn" data-pick="Braces &amp; Clear Aligners">
                 <span>Book Alignment Assessment</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 06: Teeth Whitening & Smile Esthetics -->
-          <article class="service-card reveal" data-cat="cosmetic">
+          <!-- 06 -->
+          <article class="service-card" data-cat="cosmetic">
             <div class="service-media">
               <img
                 src="assets/srv-whitening-esthetics-shr.jpg"
-                alt="Teeth Whitening and Cosmetic Smile Design at Shridha Dental Clinic"
+                alt="Teeth Whitening and Cosmetic Dentistry at Shridha Dental Clinic"
                 loading="lazy"
-                width="1376"
+                width="1408"
                 height="768"
               />
-              <span class="dept-num">06 · Smile Esthetics</span>
+              <span class="dept-num">06 · Esthetics</span>
             </div>
             <div class="service-body">
               <span class="service-dept-tag">Management of Dental Esthetics</span>
-              <h3>Teeth Whitening &amp; Cosmetic Dentistry</h3>
-              <p>Enamel-safe professional brightening and conservative smile aesthetics crafted naturally around your facial harmony.</p>
+              <h3>Teeth Whitening &amp; Smile Design</h3>
+              <p>Enamel-safe professional brightening and conservative cosmetic dentistry crafted harmoniously around your natural smile.</p>
               <ul class="treatment-list">
                 <li>Professional enamel-safe Teeth Whitening</li>
                 <li>Aesthetic bonding &amp; Cosmetic dentistry</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Teeth Whitening & Cosmetic Dentistry">
+              <a href="#book" class="card-book-btn" data-pick="Teeth Whitening &amp; Smile Design">
                 <span>Book Whitening / Smile Consult</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 07: Wisdom Tooth & Minor Oral Surgery -->
-          <article class="service-card reveal" data-cat="surgical">
+          <!-- 07 -->
+          <article class="service-card" data-cat="surgical">
             <div class="service-media">
               <img
                 src="assets/srv-oral-surgery-shr.jpg"
                 alt="Wisdom Tooth Extraction and Minor Oral Surgery at Shridha Dental Clinic"
                 loading="lazy"
-                width="1376"
+                width="1408"
                 height="768"
               />
               <span class="dept-num">07 · Oral Surgery</span>
@@ -451,151 +420,78 @@
             <div class="service-body">
               <span class="service-dept-tag">Surgical Management</span>
               <h3>Wisdom Tooth &amp; Minor Oral Surgery</h3>
-              <p>Safe, atraumatic extractions and impacted wisdom tooth procedures under strict sterile protocols and gentle local anesthesia.</p>
+              <p>Safe, atraumatic tooth extractions and impacted wisdom tooth surgery under strict aseptic protocols and gentle anesthesia.</p>
               <ul class="treatment-list">
                 <li>Impacted wisdom tooth extraction</li>
-                <li>Atraumatic painless tooth extractions</li>
-                <li>Minor oral surgical procedures</li>
+                <li>Painless teeth extraction &amp; minor oral surgery</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Wisdom Tooth & Minor Oral Surgery">
+              <a href="#book" class="card-book-btn" data-pick="Wisdom Tooth &amp; Minor Oral Surgery">
                 <span>Book Surgical Evaluation</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Service 08: Kids & Preventive Dentistry -->
-          <article class="service-card reveal" data-cat="surgical">
+          <!-- 08 -->
+          <article class="service-card" data-cat="surgical">
             <div class="service-media">
               <img
                 src="assets/srv-kids-dental-shr.jpg"
-                alt="Kids Dentistry, Pit and Fissure Sealants, and Childhood Caries Care at Shridha Dental Clinic"
+                alt="Kids Dentistry, Pit and Fissure Sealants, and Pulpectomy Care"
                 loading="lazy"
-                width="1376"
+                width="1408"
                 height="768"
               />
-              <span class="dept-num">08 · Pediatric Care</span>
+              <span class="dept-num">08 · Kids Care</span>
             </div>
             <div class="service-body">
               <span class="service-dept-tag">Management of Childhood Caries</span>
               <h3>Kids &amp; Preventive Dentistry</h3>
-              <p>Warm, fear-free dental visits for children focused on early cavity protection, gentle pulp care, and lifelong healthy habits.</p>
+              <p>Warm, fear-free dental visits for children focused on early cavity protection, gentle pulp therapy, and healthy habits.</p>
               <ul class="treatment-list">
                 <li>Preventive pit &amp; fissure sealants</li>
                 <li>Pediatric pulpectomy &amp; pulpotomy procedures</li>
               </ul>
-              <button type="button" class="card-book-btn" data-open-book="Kids & Preventive Dentistry">
+              <a href="#book" class="card-book-btn" data-pick="Kids &amp; Preventive Dentistry">
                 <span>Book Child’s Dental Visit</span>
-                <span aria-hidden="true">&rarr;</span>
-              </button>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
         </div>
       </div>
+
+      <!-- Curved Architectural Scoop Transition into Specialists Band -->
+      <div class="scoop" aria-hidden="true"></div>
     </section>
 
-    <!-- =================================================================
-         ABOUT & REAL CLINIC MOSAIC (Authentic Shridha Reception & Suites)
-    ================================================================== -->
-    <section class="section about-section" id="about">
-      <div class="container about-grid">
-        <div class="about-mosaic reveal">
-          <figure class="mosaic-card mosaic-primary" data-lightbox-src="assets/gs-home-6.jpg" data-lightbox-gimg="home-6" data-lightbox-caption="Shridha Dental Clinic — Reception Desk &amp; Arched Consultation Lounge">
-            <img
-              src="assets/gs-home-6.jpg"
-              data-gimg="home-6"
-              data-gw="1000"
-              alt="Reception desk and warm interior lounge at Shridha Dental Clinic"
-              loading="lazy"
-              width="220"
-              height="165"
-            />
-            <figcaption>Warm Reception Lounge</figcaption>
-          </figure>
-
-          <figure class="mosaic-card mosaic-tall" data-lightbox-src="assets/gs-gallery-8.jpg" data-lightbox-gimg="gallery-8" data-lightbox-caption="Shridha Dental Clinic — Primary Sterile Dental Suite">
-            <img
-              src="assets/gs-gallery-8.jpg"
-              data-gimg="gallery-8"
-              data-gw="1100"
-              alt="Sunlit dental chair and sterile clinical operatory at Shridha Dental Clinic"
-              loading="lazy"
-              width="340"
-              height="255"
-            />
-            <figcaption>Sterile Clinical Operatory</figcaption>
-          </figure>
-
-          <figure class="mosaic-card mosaic-wide" data-lightbox-src="assets/gs-home-8.jpg" data-lightbox-gimg="home-8" data-lightbox-caption="Shridha Dental Clinic — Chairside Digital X-Ray &amp; Treatment Unit">
-            <img
-              src="assets/gs-home-8.jpg"
-              data-gimg="home-8"
-              data-gw="1000"
-              alt="Sunlit dental unit and wall X-ray system inside Shridha Dental Clinic"
-              loading="lazy"
-              width="140"
-              height="70"
-            />
-            <figcaption>Chairside X-Ray &amp; Hygiene</figcaption>
-          </figure>
-        </div>
-
-        <div class="about-content reveal">
-          <span class="section-kicker">Our Health Mission</span>
-          <h2 class="section-title mask-lines">
-            <span>Personalized Care in a&nbsp;</span>
-            <span><em>Gentle, Relaxed Space.</em></span>
-          </h2>
-          <p class="about-quote">
-            “We, at Shridha Dental Clinic, are dedicated to providing quality dental care and improving your oral
-            health. You are the core of our health mission and we strive to provide personalized treatment at a
-            reasonable cost. Treatment is performed under established sterilization protocols in a gentle,
-            stress-free, relaxed environment.”
-          </p>
-
-          <div class="mission-pillars">
-            <article class="pillar-card">
-              <h3>Education-First Consultations</h3>
-              <p>Patients consistently praise how thoroughly Dr. Veena and Dr. Sudhindra explain tooth structure, enamel care, and treatment choices without rushing.</p>
-            </article>
-            <article class="pillar-card">
-              <h3>Hospital-Grade Hygiene &amp; Punctuality</h3>
-              <p>Clean, calming interiors with strictly sterilized instruments and prompt appointment slots that respect your schedule.</p>
-            </article>
+    <!-- ══════════ 6. 60FPS INFINITE SPECIALTY RINGS CAROUSEL + LEAD DOCTORS ══════════ -->
+    <section class="specialists-band" id="specialists">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker reveal">Clinical Leadership &amp; Disciplines</span>
+            <h2 class="section-title mask-lines">
+              <span class="ml"><span>Doctors Who Listen, Explain</span></span>
+              <span class="ml"><span><em>&amp; Put You at Ease.</em></span></span>
+            </h2>
           </div>
-
-          <div class="about-actions">
-            <button type="button" class="btn btn-primary" data-open-book="First-Time Oral Health Checkup">
-              <span>Book Your Checkup</span>
-            </button>
-            <a href="#gallery" class="text-arrow-link">Tour our clinic interiors &rarr;</a>
+          <div class="carousel-arrows">
+            <button type="button" id="spPrev" aria-label="Previous Specialties">←</button>
+            <button type="button" id="spNext" aria-label="Next Specialties">→</button>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- =================================================================
-         SPECIALISTS BAND — Dr. Veena S. Narayanan & Dr. Sudhindra
-    ================================================================== -->
-    <section class="section doctors-section" id="doctors">
-      <div class="container">
-        <div class="section-head section-head-light reveal">
-          <div>
-            <span class="section-kicker kicker-gold">Clinical Leadership</span>
-            <h2 class="section-title title-light mask-lines">
-              <span>Doctors Who Listen, Explain&nbsp;</span>
-              <span><em>&amp; Put You at Ease.</em></span>
-            </h2>
-          </div>
-          <p class="section-desc desc-light">
-            Every consultation at Shridha Dental Clinic is unhurried and transparent — so you understand exactly
-            what is happening with your teeth before choosing any treatment.
-          </p>
-        </div>
+      <!-- Continuous 60fps Infinite Auto-Gliding Specialty Rings -->
+      <div class="sp-viewport">
+        <div class="sp-track" id="spTrack"></div>
+      </div>
 
-        <div class="doctors-grid">
-          <!-- Dr. Veena S. Narayanan -->
-          <article class="doctor-card reveal">
+      <!-- Named Lead Doctors Spotlight + Circular Curtain Consultation Banner -->
+      <div class="container doctors-spotlight-wrap">
+        <div class="doctors-grid reveal-group">
+          <article class="doctor-card">
             <div class="doctor-top">
               <div class="doctor-monogram" aria-hidden="true">VN</div>
               <div>
@@ -605,35 +501,28 @@
               </div>
             </div>
             <p class="doctor-bio">
-              With over two decades of academic leadership and clinical practice, Dr. Veena brings specialist expertise
-              in diagnosing complex oral mucosal conditions, premalignant lesions, TMJ disorders, and orofacial pain —
-              paired with a remarkably gentle, reassuring chairside manner across general and preventive family care.
+              With over two decades of academic leadership and clinical practice, Dr. Veena brings specialist expertise in diagnosing oral mucosal lesions, premalignant conditions, TMJ disorders, and orofacial pain — paired with a remarkably gentle, reassuring chairside manner.
             </p>
             <div class="doctor-tags">
               <span>Oral Medicine &amp; Diagnosis</span>
               <span>TMJ &amp; Orofacial Pain</span>
-              <span>Preventive &amp; Enamel Care</span>
+              <span>Preventive Enamel Care</span>
               <span>Gentle Chairside Care</span>
             </div>
-            <button type="button" class="btn btn-gold-outline" data-open-book="Consultation with Dr. Veena S. Narayanan">
-              <span>Consult Dr. Veena</span>
-            </button>
+            <a href="#book" class="btn btn-gold-outline" data-pick="Consultation with Dr. Veena S. Narayanan">Consult Dr. Veena →</a>
           </article>
 
-          <!-- Dr. Sudhindra -->
-          <article class="doctor-card reveal">
+          <article class="doctor-card">
             <div class="doctor-top">
               <div class="doctor-monogram" aria-hidden="true">DS</div>
               <div>
-                <span class="doctor-role">Restorative, Prosthodontic &amp; Family Dental Specialist</span>
+                <span class="doctor-role">Restorative, Prosthodontic &amp; Family Specialist</span>
                 <h3>Dr. Sudhindra</h3>
                 <p class="doctor-cred">Senior Clinician · Precision Crowns, Bridges, Endodontics &amp; Comprehensive Family Dentistry</p>
               </div>
             </div>
             <p class="doctor-bio">
-              Known by patients across K. Narayanapura for clear, educative consultations and meticulous clinical work,
-              Dr. Sudhindra focuses on long-lasting crown and bridge restorations, painless root canal therapy,
-              implants, and practical oral hygiene guidance for every age group.
+              Praised across patient reviews for clear, educative consultations and meticulous precision, Dr. Sudhindra focuses on durable crown and cap fixations, painless root canals, implants, and practical oral hygiene guidance for all ages.
             </p>
             <div class="doctor-tags">
               <span>Crowns, Caps &amp; Bridges</span>
@@ -641,256 +530,157 @@
               <span>Dental Implants</span>
               <span>Patient Education</span>
             </div>
-            <button type="button" class="btn btn-gold-outline" data-open-book="Consultation with Dr. Sudhindra">
-              <span>Consult Dr. Sudhindra</span>
-            </button>
+            <a href="#book" class="btn btn-gold-outline" data-pick="Consultation with Dr. Sudhindra">Consult Dr. Sudhindra →</a>
           </article>
+        </div>
+
+        <!-- Arch Callout Banner with Circular Curtain Reveal + Spinning Rotor Badge -->
+        <div class="consult-banner reveal-scale">
+          <div class="consult-text">
+            <span class="kicker-light">Transparent, Unhurried Care</span>
+            <h3 class="mask-lines">
+              <span class="ml"><span>Understand Every Tooth</span></span>
+              <span class="ml"><span><em>Before You Decide.</em></span></span>
+            </h3>
+            <p>
+              Whether a crown cap came loose, wisdom tooth pain flared up, or your family is due for a preventive cleaning — Dr. Veena and Dr. Sudhindra walk you through every finding clearly with honest, reasonable pricing.
+            </p>
+            <a href="#book" class="btn btn-gold btn-lg">Schedule Your Visit</a>
+          </div>
+          <div class="consult-media">
+            <img
+              src="assets/srv-oral-medicine-shr.jpg"
+              alt="Specialist dental consultation at Shridha Dental Clinic"
+              loading="lazy"
+              width="1408"
+              height="768"
+            />
+            <div class="badge-rotor small" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <defs>
+                  <path id="shrCirc2" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
+                </defs>
+                <text>
+                  <textPath href="#shrCirc2">HONEST ADVICE • GENTLE CARE • 5.0★ • </textPath>
+                </text>
+              </svg>
+              <span class="badge-tooth">✦</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- =================================================================
-         INSIDE SHRIDHA GALLERY — All Authentic Clinic Photos + Storefront
-    ================================================================== -->
-    <section class="section gallery-section" id="gallery">
-      <div class="container">
-        <div class="section-head reveal">
+    <!-- ══════════ 7. INSIDE SHRIDHA CLINIC BENTO + INFINITE TILTED POLAROID FILMSTRIP ══════════ -->
+    <section class="section gallery-section" id="about">
+      <div class="container" id="gallery">
+        <div class="section-head">
           <div>
-            <span class="section-kicker">Inside Shridha Dental Clinic</span>
+            <span class="section-kicker reveal">Inside Shridha Dental Clinic</span>
             <h2 class="section-title mask-lines">
-              <span>Clean Spaces, Modern&nbsp;</span>
-              <span><em>Equipment &amp; Calm Interiors.</em></span>
+              <span class="ml"><span>Spotless Suites, Modern</span></span>
+              <span class="ml"><span><em>Equipment &amp; Calm Interiors.</em></span></span>
             </h2>
           </div>
-          <p class="section-desc">
-            Real photographs of our K. Narayanapura clinic interiors, treatment chair suites, backlit crest, and Kanasu Complex storefront. Tap any photo to enlarge.
+          <p class="section-desc reveal">
+            Authentic photographs of our K. Narayanapura reception, backlit crest, chairside X-ray suites, and Kanasu Complex storefront. Tap any photo to view full screen.
           </p>
         </div>
 
-        <div class="gallery-bento">
-          <figure class="bento-item bento-hero reveal" tabindex="0" role="button" data-lightbox-src="assets/gs-gallery-8.jpg" data-lightbox-gimg="gallery-8" data-lightbox-caption="Shridha Dental Clinic — Primary Clinical Operatory &amp; Ergonomic Chair">
-            <img
-              src="assets/gs-gallery-8.jpg"
-              data-gimg="gallery-8"
-              data-gw="1280"
-              alt="Main clinical operatory and modern interior at Shridha Dental Clinic"
-              loading="lazy"
-              width="340"
-              height="255"
-            />
+        <div class="gallery-bento reveal-group">
+          <figure class="bento-item bento-hero" tabindex="0" role="button" data-lightbox-src="assets/gs-gallery-8.jpg" data-lightbox-gimg="gallery-8" data-lightbox-caption="Shridha Dental Clinic — Primary Sunlit Operatory &amp; Sterile Dental Chair">
+            <img src="assets/gs-gallery-8.jpg" data-gimg="gallery-8" data-gw="1280" alt="Primary clinical operatory at Shridha Dental Clinic" loading="lazy" width="340" height="255" />
             <figcaption>
               <strong>Primary Treatment Suite</strong>
-              <span>Sunlit operatory with strict sterilization protocols</span>
+              <span>Sunlit operatory under established sterilization protocols</span>
             </figcaption>
           </figure>
 
-          <figure class="bento-item reveal" tabindex="0" role="button" data-lightbox-src="assets/gs-home-7.jpg" data-lightbox-gimg="home-7" data-lightbox-caption="Shridha Dental Clinic — Backlit Reception Crest: Centre for Comprehensive Oral Health">
-            <img
-              src="assets/gs-home-7.jpg"
-              data-gimg="home-7"
-              data-gw="1100"
-              alt="Shridha Dental Clinic backlit wall crest inside reception"
-              loading="lazy"
-              width="280"
-              height="196"
-            />
+          <figure class="bento-item" tabindex="0" role="button" data-lightbox-src="assets/gs-home-7.jpg" data-lightbox-gimg="home-7" data-lightbox-caption="Shridha Dental Clinic — Backlit Wall Crest: Centre for Comprehensive Oral Health">
+            <img src="assets/gs-home-7.jpg" data-gimg="home-7" data-gw="1100" alt="Shridha Dental Clinic backlit wall crest" loading="lazy" width="280" height="196" />
             <figcaption>
               <strong>Backlit Reception Crest</strong>
               <span>Centre for Comprehensive Oral Health</span>
             </figcaption>
           </figure>
 
-          <figure class="bento-item reveal" tabindex="0" role="button" data-lightbox-src="assets/clinic-exterior-shr.jpg" data-lightbox-caption="Shridha Dental Clinic — Kanasu Complex Storefront, K. Narayanapura Road">
-            <img
-              src="assets/clinic-exterior-shr.jpg"
-              alt="Shridha Dental Clinic exterior signage at Kanasu Complex, LBS Nagar, K. Narayanapura Road"
-              loading="lazy"
-              width="360"
-              height="360"
-            />
+          <figure class="bento-item" tabindex="0" role="button" data-lightbox-src="assets/gs-home-6.jpg" data-lightbox-gimg="home-6" data-lightbox-caption="Shridha Dental Clinic — Reception Desk &amp; Arched Lounge">
+            <img src="assets/gs-home-6.jpg" data-gimg="home-6" data-gw="1000" alt="Reception desk and lounge at Shridha Dental Clinic" loading="lazy" width="220" height="165" />
+            <figcaption>
+              <strong>Warm Reception Lounge</strong>
+              <span>Welcoming, relaxed patient space</span>
+            </figcaption>
+          </figure>
+
+          <figure class="bento-item" tabindex="0" role="button" data-lightbox-src="assets/gs-home-8.jpg" data-lightbox-gimg="home-8" data-lightbox-caption="Shridha Dental Clinic — Chairside Digital X-Ray &amp; Dental Unit">
+            <img src="assets/gs-home-8.jpg" data-gimg="home-8" data-gw="1000" alt="Chairside X-ray and sunlit operatory at Shridha Dental Clinic" loading="lazy" width="140" height="70" />
+            <figcaption>
+              <strong>Chairside Digital X-Ray</strong>
+              <span>Precision diagnostics &amp; clean equipment</span>
+            </figcaption>
+          </figure>
+
+          <figure class="bento-item" tabindex="0" role="button" data-lightbox-src="assets/gs-gallery-7.jpg" data-lightbox-gimg="gallery-7" data-lightbox-caption="Shridha Dental Clinic — Operatory II &amp; Warm Cove Lighting">
+            <img src="assets/gs-gallery-7.jpg" data-gimg="gallery-7" data-gw="1000" alt="Operatory chair and cove mirror lighting at Shridha Dental Clinic" loading="lazy" width="140" height="121" />
+            <figcaption>
+              <strong>Operatory Suite II</strong>
+              <span>Warm cove mirror &amp; ergonomic setup</span>
+            </figcaption>
+          </figure>
+
+          <figure class="bento-item" tabindex="0" role="button" data-lightbox-src="assets/clinic-exterior-shr.jpg" data-lightbox-caption="Shridha Dental Clinic — Kanasu Complex Storefront, K. Narayanapura Road">
+            <img src="assets/clinic-exterior-shr.jpg" alt="Shridha Dental Clinic exterior signage at Kanasu Complex, LBS Nagar" loading="lazy" width="360" height="360" />
             <figcaption>
               <strong>Kanasu Complex Storefront</strong>
               <span>Near Hanumantha Gowda Circle, LBS Nagar</span>
             </figcaption>
           </figure>
+        </div>
+      </div>
 
-          <figure class="bento-item reveal" tabindex="0" role="button" data-lightbox-src="assets/gs-gallery-7.jpg" data-lightbox-gimg="gallery-7" data-lightbox-caption="Shridha Dental Clinic — Dental Operatory &amp; Warm Cove Mirror">
-            <img
-              src="assets/gs-gallery-7.jpg"
-              data-gimg="gallery-7"
-              data-gw="1000"
-              alt="Clean dental operatory chair and cove lighting at Shridha Dental Clinic"
-              loading="lazy"
-              width="140"
-              height="121"
-            />
-            <figcaption>
-              <strong>Operatory Suite II</strong>
-              <span>Modern chairside instrumentation</span>
-            </figcaption>
-          </figure>
-
-          <figure class="bento-item reveal" tabindex="0" role="button" data-lightbox-src="assets/gs-gallery-6.jpg" data-lightbox-gimg="gallery-6" data-lightbox-caption="Shridha Dental Clinic — Patient Waiting Lounge &amp; Entrance">
-            <img
-              src="assets/gs-gallery-6.jpg"
-              data-gimg="gallery-6"
-              data-gw="1000"
-              alt="Warm patient waiting area and entrance at Shridha Dental Clinic"
-              loading="lazy"
-              width="140"
-              height="157"
-            />
-            <figcaption>
-              <strong>Patient Waiting Lounge</strong>
-              <span>Calm, welcoming environment</span>
-            </figcaption>
-          </figure>
-
-          <figure class="bento-item reveal" tabindex="0" role="button" data-lightbox-src="assets/gs-services-14.jpg" data-lightbox-gimg="services-14" data-lightbox-caption="Shridha Dental Clinic — Overhead LED Dental Operatory Suite">
-            <img
-              src="assets/gs-services-14.jpg"
-              data-gimg="services-14"
-              data-gw="1000"
-              alt="Dental chair under overhead clinical light at Shridha Dental Clinic"
-              loading="lazy"
-              width="240"
-              height="171"
-            />
-            <figcaption>
-              <strong>Precision Procedure Bay</strong>
-              <span>Ergonomic dental chair &amp; LED illumination</span>
-            </figcaption>
-          </figure>
+      <!-- Infinite Tilted Polaroid Filmstrip Collage (Video Outro Animation) -->
+      <div class="filmstrip-wrap">
+        <div class="marquee gal-marquee" aria-hidden="true">
+          <div class="marquee-track gal-track" id="galTrack"></div>
+        </div>
+        <div class="gal-viewport">
+          <div class="gal-strip" id="galStrip"></div>
         </div>
       </div>
     </section>
 
-    <!-- =================================================================
-         VERIFIED 5.0 ★ PATIENT REVIEWS (Google Sites + Google Maps)
-    ================================================================== -->
+    <!-- ══════════ 8. AUTO-SLIDING 5.0 ★ REVIEWS CAROUSEL + PILL DOTS + SWIPE ══════════ -->
     <section class="section reviews-section" id="reviews">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head">
           <div>
-            <span class="section-kicker">Patient Stories · 5.0 ★ Rated</span>
+            <span class="section-kicker reveal">5.0 ★ Across 34 Google Reviews</span>
             <h2 class="section-title mask-lines">
-              <span>Trusted by Families Across&nbsp;</span>
-              <span><em>K. Narayanapura &amp; Beyond.</em></span>
+              <span class="ml"><span>Real Stories from Happy</span></span>
+              <span class="ml"><span><em>Patients &amp; Families.</em></span></span>
             </h2>
           </div>
-          <div class="rating-summary-card">
-            <div class="rating-big">5.0</div>
-            <div>
-              <div class="stars-row" aria-label="5 out of 5 stars">★★★★★</div>
-              <span>Based on <strong>34 verified Google reviews</strong></span>
-            </div>
+          <div class="carousel-arrows dark-arrows">
+            <button type="button" id="rvPrev" aria-label="Previous Review">←</button>
+            <button type="button" id="rvNext" aria-label="Next Review">→</button>
           </div>
         </div>
 
-        <div class="reviews-grid">
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Amazing! Thanks Dr Veena and Dr Sudheendra for my check ups/treatment and for your knowledge and tips on dental hygiene and enamel care. Beautiful clinic, love the interiors, clean spaces &amp; clean equipments. If you are ever in India (Bengaluru), don’t forget to make your appointment. It’s quick, easy and get seen on time and leave happy and smiling like me.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">AV</span>
-              <div>
-                <strong>Akshata V.</strong>
-                <span>Verified Patient Testimonial</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Went for a cap fixation that had come off. Dr. Sudhindra and Dr Veena are extremely professional and educative — nobody explains what’s going on with your teeth better than them.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">SZ</span>
-              <div>
-                <strong>Sayed Zakriya</strong>
-                <span>Google Review · 5.0 ★</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Dentist visit is usually a painful experience, but this one was otherwise — thank you Dr. Veena for making me smile.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">NK</span>
-              <div>
-                <strong>Nikhil Kunder</strong>
-                <span>Verified Patient Testimonial</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Quality, convenience, and affordability come together here. Truly a family-friendly dental practice that caters to patients of all ages.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">RU</span>
-              <div>
-                <strong>Raghavendra U S</strong>
-                <span>Google Local Guide · 5.0 ★</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Great hygiene, professional doctors &amp; comforting ambience.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">VN</span>
-              <div>
-                <strong>Vijay N.</strong>
-                <span>Verified Patient Testimonial</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="review-card reveal">
-            <div class="review-stars" aria-hidden="true">★★★★★</div>
-            <p class="review-text">
-              “Visit this clinic for any dental problems. Highly recommended. Best practice.”
-            </p>
-            <div class="review-footer">
-              <span class="reviewer-avatar" aria-hidden="true">AR</span>
-              <div>
-                <strong>Austin Richard S</strong>
-                <span>Google Review · 5.0 ★</span>
-              </div>
-            </div>
-          </article>
+        <div class="rv-viewport">
+          <div class="rv-track" id="rvTrack"></div>
         </div>
-
-        <div class="reviews-mobile-nav" aria-label="Swipe or navigate patient reviews">
-          <button type="button" class="rev-nav-btn" id="revPrevBtn" aria-label="Previous Review">&larr;</button>
-          <span class="rev-swipe-hint">Swipe patient stories</span>
-          <button type="button" class="rev-nav-btn" id="revNextBtn" aria-label="Next Review">&rarr;</button>
-        </div>
+        <div class="rv-dots" id="rvDots" aria-label="Review Slide Pagination"></div>
       </div>
     </section>
 
-    <!-- =================================================================
-         VISIT, HOURS & MAP — Kanasu Complex, LBS Nagar, K. Narayanapura
-    ================================================================== -->
+    <!-- ══════════ 9. VISIT, LIVE IST HOURS & GOOGLE MAP ══════════ -->
     <section class="section contact-section" id="contact">
       <div class="container contact-grid">
         <div class="contact-card reveal">
-          <span class="section-kicker">Visit Shridha Dental Clinic</span>
+          <span class="section-kicker">Visit Us in K. Narayanapura</span>
           <h2 class="section-title mask-lines">
-            <span>Open All 7 Days in&nbsp;</span>
-            <span><em>K. Narayanapura.</em></span>
+            <span class="ml"><span>Open All 7 Days at</span></span>
+            <span class="ml"><span><em>Kanasu Complex.</em></span></span>
           </h2>
 
           <div class="contact-block">
@@ -905,7 +695,7 @@
           </div>
 
           <div class="contact-block">
-            <h3>Clinic Hours <span class="hours-live-pill" id="hoursLivePill">Checking IST Hours…</span></h3>
+            <h3>Consultation Hours <span class="hours-live-pill" id="hoursLivePill">Open Today</span></h3>
             <dl class="hours-list">
               <div class="hours-row" data-days="1,2,3,4,5,6">
                 <dt>Monday – Saturday</dt>
@@ -930,17 +720,13 @@
           </div>
 
           <div class="contact-cta-group">
-            <button type="button" class="btn btn-primary btn-lg" data-open-book="General Dental Consultation">
-              <span>Book Appointment Online</span>
-            </button>
+            <a href="#book" class="btn btn-primary btn-lg">Book Appointment ↓</a>
             <a
               href="https://www.google.com/maps/search/?api=1&amp;query=13.066022,77.6394209&amp;query_place_id=ChIJz3DcUJAZrjsRlGx-odeTYww"
               target="_blank"
               rel="noopener"
               class="btn btn-outline btn-lg"
-            >
-              <span>Get Directions</span>
-            </a>
+            >Get Directions ↗</a>
           </div>
         </div>
 
@@ -962,174 +748,178 @@
               target="_blank"
               rel="noopener"
               class="map-open-link"
-            >Open in Maps &nearr;</a>
+            >Open in Maps ↗</a>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ══════════ 10. EXPANDING CIRCULAR CLIP-PATH BOOKING BAND + FOOTER ══════════ -->
+    <section class="book-band" id="book">
+      <div class="container">
+        <div class="center">
+          <span class="section-kicker">Instant WhatsApp &amp; Email Booking</span>
+          <h2 class="section-title mask-lines center">
+            <span class="ml"><span>Book Your Visit with</span></span>
+            <span class="ml"><span><em>Dr. Veena &amp; Dr. Sudhindra</em></span></span>
+          </h2>
+        </div>
+
+        <form id="bookForm" class="book-form" novalidate>
+          <div class="mode-toggle" role="group" aria-label="Preferred Visit Slot">
+            <button type="button" class="is-on" data-slot="Morning (10:00 AM – 1:00 PM)">Morning (10–1)</button>
+            <button type="button" data-slot="Afternoon / Evening (1:00 PM – 8:00 PM)">Afternoon / Eve (1–8)</button>
+            <button type="button" data-slot="Sunday Morning (10:00 AM – 1:00 PM)">Sunday (10–1)</button>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>Patient Full Name *</span>
+              <input type="text" name="name" required placeholder="e.g. Karthik Rao" autocomplete="name" />
+            </label>
+            <label class="field">
+              <span>10-Digit Mobile Number *</span>
+              <input type="tel" name="phone" required placeholder="e.g. 99000 00000" autocomplete="tel" />
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>Select Dental Service *</span>
+              <select name="service" id="serviceSelect" required>
+                <option value="Comprehensive Dental Checkup">Comprehensive Dental Checkup</option>
+                <option value="Root Canal &amp; Tooth-Colored Fillings">Root Canal &amp; Tooth-Colored Fillings</option>
+                <option value="Dental Implants, Crowns &amp; Bridges">Dental Implants, Crowns &amp; Bridges</option>
+                <option value="Oral Medicine, TMJ &amp; Oral Screening">Oral Medicine, TMJ &amp; Oral Screening</option>
+                <option value="Laser Gum Care &amp; Teeth Cleaning">Laser Gum Care &amp; Teeth Cleaning</option>
+                <option value="Braces &amp; Clear Aligners">Braces &amp; Clear Aligners</option>
+                <option value="Teeth Whitening &amp; Smile Design">Teeth Whitening &amp; Smile Design</option>
+                <option value="Wisdom Tooth &amp; Minor Oral Surgery">Wisdom Tooth &amp; Minor Oral Surgery</option>
+                <option value="Kids &amp; Preventive Dentistry">Kids &amp; Preventive Dentistry</option>
+                <option value="Consultation with Dr. Veena S. Narayanan">Consultation with Dr. Veena S. Narayanan</option>
+                <option value="Consultation with Dr. Sudhindra">Consultation with Dr. Sudhindra</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Preferred Date *</span>
+              <input type="date" name="date" required />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Symptoms or Notes (Optional)</span>
+            <textarea name="notes" rows="2" placeholder="Toothache, loose crown/cap, routine cleaning, child checkup…"></textarea>
+          </label>
+
+          <p class="form-err" id="formErr" role="alert"></p>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-whatsapp btn-lg btn-block">
+              <img src="assets/whatsapp-white.svg" alt="" width="20" height="20" />
+              <span>Book Appointment on WhatsApp (+91 89040 27171)</span>
+            </button>
+            <button type="button" id="sendEmailBtn" class="btn btn-outline btn-lg btn-block">
+              <span>Or Request via Email (shridhadental@gmail.com)</span>
+            </button>
+          </div>
+
+          <div class="form-ok" id="formOk" hidden></div>
+        </form>
+
+        <!-- Embedded Architectural Footer -->
+        <footer class="foot-inner">
+          <div class="foot-grid">
+            <div class="foot-brand">
+              <div class="footer-logo-box">
+                <img
+                  src="assets/gs-home-9.jpg"
+                  data-gimg="home-9"
+                  data-gw="520"
+                  alt="Shridha Dental Clinic Wordmark"
+                  width="142"
+                  height="88"
+                  loading="lazy"
+                />
+              </div>
+              <p>
+                Everyone deserves a Healthy Smile. Personalized oral medicine, diagnostics, restorative, laser gum care, aligners, and family dentistry in K. Narayanapura.
+              </p>
+            </div>
+
+            <div class="foot-col">
+              <h4>Services</h4>
+              <nav>
+                <a href="#services">Root Canal &amp; Fillings</a>
+                <a href="#services">Implants, Crowns &amp; Bridges</a>
+                <a href="#services">Oral Medicine &amp; TMJ</a>
+                <a href="#services">Laser Gum &amp; Cleaning</a>
+                <a href="#services">Braces, Aligners &amp; Whitening</a>
+                <a href="#services">Wisdom Surgery &amp; Kids</a>
+              </nav>
+            </div>
+
+            <div class="foot-col">
+              <h4>Clinic Address</h4>
+              <p>
+                #7, Kodandaramaiah Layout, LBS Nagar,<br />
+                Near Hanumantha Gowda Circle,<br />
+                K. Narayanapura Road, Bengaluru 560077
+              </p>
+              <nav>
+                <a href="tel:+918904027171">+91 89040 27171</a>
+                <a href="mailto:shridhadental@gmail.com">shridhadental@gmail.com</a>
+              </nav>
+            </div>
+
+            <div class="foot-col">
+              <h4>Timings</h4>
+              <p>
+                <strong>Mon – Sat:</strong> 10:00 AM – 8:00 PM<br />
+                <strong>Sunday:</strong> 10:00 AM – 1:00 PM
+              </p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&amp;query=13.066022,77.6394209&amp;query_place_id=ChIJz3DcUJAZrjsRlGx-odeTYww"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary btn-sm"
+              >Google Maps ↗</a>
+            </div>
+          </div>
+
+          <div class="foot-base">
+            <span>&copy; 2026 Shridha Dental Clinic · Centre for Comprehensive Oral Health</span>
+            <span>Dr. Veena S. Narayanan &amp; Dr. Sudhindra · K. Narayanapura, Bengaluru</span>
+          </div>
+        </footer>
+      </div>
+    </section>
   </main>
 
-  <!-- =================================================================
-       FOOTER
-  ================================================================== -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo-box">
-          <img
-            src="assets/gs-home-9.jpg"
-            data-gimg="home-9"
-            data-gw="520"
-            alt="Shridha Dental Clinic Logo"
-            width="136"
-            height="84"
-            loading="lazy"
-          />
-        </div>
-        <p class="footer-tagline">
-          Everyone deserves a Healthy Smile. Centre for Comprehensive Oral Health — personalized diagnostics, restorative, laser periodontal, cosmetic, and family dental care.
-        </p>
-      </div>
+  <!-- Pulsing Floating WhatsApp Action + Spring Back-to-Top Button -->
+  <a
+    class="wa-float"
+    href="https://wa.me/918904027171?text=Hello%20Shridha%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat on WhatsApp with Shridha Dental Clinic"
+  >
+    <img src="assets/whatsapp.svg" alt="" width="34" height="34" />
+  </a>
+  <button type="button" class="to-top" id="toTop" aria-label="Scroll back to top">↑</button>
 
-      <div class="footer-col">
-        <h4>Our Services</h4>
-        <ul>
-          <li><a href="#services">Root Canal &amp; Tooth-Colored Fillings</a></li>
-          <li><a href="#services">Dental Implants, Crowns &amp; Bridges</a></li>
-          <li><a href="#services">Oral Medicine, TMJ &amp; Screening</a></li>
-          <li><a href="#services">Laser Gum Care &amp; Cleaning</a></li>
-          <li><a href="#services">Braces, Clear Aligners &amp; Whitening</a></li>
-          <li><a href="#services">Wisdom Tooth Surgery &amp; Kids Care</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Visit &amp; Contact</h4>
-        <p>
-          #7, Kodandaramaiah Layout, LBS Nagar,<br />
-          Near Hanumantha Gowda Circle,<br />
-          K. Narayanapura Road, Bengaluru 560077
-        </p>
-        <p class="footer-contact-links">
-          <a href="tel:+918904027171">+91 89040 27171</a><br />
-          <a href="mailto:shridhadental@gmail.com">shridhadental@gmail.com</a>
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Consultation Hours</h4>
-        <p>
-          <strong>Mon – Sat:</strong> 10:00 AM – 8:00 PM<br />
-          <strong>Sunday:</strong> 10:00 AM – 1:00 PM
-        </p>
-        <button type="button" class="btn btn-whatsapp btn-sm footer-wa-btn" data-open-book="General Dental Consultation">
-          <img src="assets/whatsapp-white.svg" alt="" width="16" height="16" />
-          <span>Book via WhatsApp</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <span>&copy; 2026 Shridha Dental Clinic · K. Narayanapura, Bengaluru 560077</span>
-      <span>Dr. Veena S. Narayanan &amp; Dr. Sudhindra</span>
-    </div>
-  </footer>
-
-  <!-- =================================================================
-       STICKY MOBILE BAR (Thumb-Friendly Call / WhatsApp / Book)
-  ================================================================== -->
+  <!-- Sticky Mobile Quick-Action Pill Bar -->
   <div class="mobile-bar" role="region" aria-label="Quick Contact Actions">
-    <a href="tel:+918904027171" class="mbar-btn mbar-call">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <span>Call</span>
-    </a>
+    <a href="tel:+918904027171" class="mbar-btn mbar-call">Call</a>
     <a
       href="https://wa.me/918904027171?text=Hello%20Shridha%20Dental%20Clinic%2C%20I%20would%20like%20to%20book%20an%20appointment."
       target="_blank"
       rel="noopener"
       class="mbar-btn mbar-wa"
-    >
-      <img src="assets/whatsapp-white.svg" alt="" width="18" height="18" />
-      <span>WhatsApp</span>
-    </a>
-    <button type="button" class="mbar-btn mbar-book" data-open-book="General Dental Consultation">
-      <span>Book Visit</span>
-    </button>
+    >WhatsApp</a>
+    <a href="#book" class="mbar-btn mbar-book">Book Visit</a>
   </div>
 
-  <!-- =================================================================
-       INTERACTIVE APPOINTMENT MODAL (WhatsApp + Email Options)
-  ================================================================== -->
-  <div class="modal-backdrop" id="bookModal" hidden>
-    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
-      <div class="modal-head">
-        <div>
-          <span class="section-kicker">Shridha Dental Clinic</span>
-          <h3 id="bookModalTitle">Request Your Appointment</h3>
-        </div>
-        <button type="button" class="icon-close" data-close-book aria-label="Close Booking Dialog">&times;</button>
-      </div>
-
-      <form id="bookForm" class="book-form">
-        <label class="field">
-          <span>Your Full Name *</span>
-          <input type="text" name="name" required placeholder="e.g. Karthik Rao" autocomplete="name" />
-        </label>
-
-        <div class="field-row">
-          <label class="field">
-            <span>Phone Number *</span>
-            <input type="tel" name="phone" required placeholder="+91 98XXX XXXXX" autocomplete="tel" />
-          </label>
-          <label class="field">
-            <span>Preferred Time Slot</span>
-            <select name="slot">
-              <option value="Morning (10:00 AM – 1:00 PM)">Morning (10:00 AM – 1:00 PM)</option>
-              <option value="Afternoon (1:00 PM – 5:00 PM)">Afternoon (1:00 PM – 5:00 PM)</option>
-              <option value="Evening (5:00 PM – 8:00 PM, Mon–Sat)">Evening (5:00 PM – 8:00 PM · Mon–Sat)</option>
-              <option value="Sunday Morning (10:00 AM – 1:00 PM)">Sunday Morning (10:00 AM – 1:00 PM)</option>
-            </select>
-          </label>
-        </div>
-
-        <label class="field">
-          <span>Service / Treatment</span>
-          <select name="service" id="bookServiceSelect">
-            <option value="General Dental Consultation">General Dental Consultation</option>
-            <option value="Root Canal & Tooth-Colored Fillings">Root Canal &amp; Tooth-Colored Fillings</option>
-            <option value="Dental Implants, Crowns & Bridges">Dental Implants, Crowns &amp; Bridges</option>
-            <option value="Oral Medicine, TMJ & Oral Screening">Oral Medicine, TMJ &amp; Oral Screening</option>
-            <option value="Laser Gum Care & Teeth Cleaning">Laser Gum Care &amp; Teeth Cleaning</option>
-            <option value="Braces & Clear Aligners">Braces &amp; Clear Aligners</option>
-            <option value="Teeth Whitening & Cosmetic Dentistry">Teeth Whitening &amp; Cosmetic Dentistry</option>
-            <option value="Wisdom Tooth & Minor Oral Surgery">Wisdom Tooth &amp; Minor Oral Surgery</option>
-            <option value="Kids & Preventive Dentistry">Kids &amp; Preventive Dentistry</option>
-            <option value="Consultation with Dr. Veena S. Narayanan">Consultation with Dr. Veena S. Narayanan</option>
-            <option value="Consultation with Dr. Sudhindra">Consultation with Dr. Sudhindra</option>
-          </select>
-        </label>
-
-        <label class="field">
-          <span>Notes (Optional)</span>
-          <textarea name="notes" rows="2" placeholder="Toothache, cap came loose, routine cleaning, preferred date…"></textarea>
-        </label>
-
-        <div class="modal-actions">
-          <button type="submit" class="btn btn-whatsapp btn-lg btn-block">
-            <img src="assets/whatsapp-white.svg" alt="" width="19" height="19" />
-            <span>Send Request on WhatsApp (+91 89040 27171)</span>
-          </button>
-          <button type="button" id="sendEmailBtn" class="btn btn-outline btn-block">
-            <span>Or Send via Email (shridhadental@gmail.com)</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- =================================================================
-       LIGHTBOX VIEWER FOR CLINIC PHOTOS
-  ================================================================== -->
+  <!-- Lightbox Modal for Enlarged Clinic Photos -->
   <div class="lightbox" id="lightbox" hidden>
     <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close Enlarged Photo">&times;</button>
     <figure class="lightbox-inner">
@@ -1138,6 +928,6 @@
     </figure>
   </div>
 
-  <script src="script.js" defer></script>
+  <script src="script.js?v=6" defer></script>
 </body>
 </html>
