@@ -253,14 +253,17 @@
       return first.offsetWidth + (parseFloat(getComputedStyle(spTrack).gap) || 24);
     };
 
-    (function spLoop() {
+    let spLast = performance.now();
+    (function spLoop(now) {
+      const dt = Math.min(2.2, Math.max(0.4, (now - spLast) / 16.667));
+      spLast = now;
       if (!spPaused) {
-        spX -= 0.65;
+        spX -= 0.72 * dt;
         if (Math.abs(spX) >= spStep() * specialties.length) spX = 0;
-        spTrack.style.transform = `translateX(${spX}px)`;
+        spTrack.style.transform = `translate3d(${spX.toFixed(2)}px, 0, 0)`;
       }
       requestAnimationFrame(spLoop);
-    })();
+    })(performance.now());
 
     spTrack.addEventListener('pointerenter', () => { spPaused = true; });
     spTrack.addEventListener('pointerleave', () => { spPaused = false; });
@@ -307,39 +310,62 @@
     upgradeClinicPhotos(galStrip);
   }
 
-  /* ── 10. Auto-Sliding 5.0 ★ Reviews Carousel + Expanding Pill Dots + Swipe ── */
+  /* ── 10. Continuous 60fps Infinite Testimonials + Praise Ribbon + Live Pill Dots + Swipe ── */
+  const praiseQuotes = [
+    '“Dentist visit is usually painful, this one was otherwise — thank you Dr. Veena”',
+    '“Nobody explains what’s going on with your teeth better than Dr. Sudhindra & Dr. Veena”',
+    '“Beautiful clinic, clean spaces & spotless equipment”',
+    '“Quick, easy appointment & seen right on time”',
+    '“Quality, convenience & affordability for the whole family”',
+    '“Great hygiene, professional doctors & comforting ambience”'
+  ];
+
+  const praiseTrack = $('#praiseTrack');
+  if (praiseTrack) {
+    const praiseMarkup = praiseQuotes
+      .map((q) => `<span class="praise-pill"><b>★★★★★</b><span>${q}</span></span>`)
+      .join('');
+    praiseTrack.innerHTML = praiseMarkup + praiseMarkup;
+  }
+
   const reviews = [
     {
+      initials: 'AV',
       chip: 'Hygiene & Enamel Care',
       text: 'Amazing! Thanks Dr Veena and Dr Sudheendra for my check ups/treatment and for your knowledge and tips on dental hygiene and enamel care. Beautiful clinic, love the interiors, clean spaces & clean equipments. Quick, easy and seen on time!',
       who: 'Akshata V.',
       svc: 'Verified Patient Testimonial · 5.0 ★'
     },
     {
+      initials: 'SZ',
       chip: 'Clear Explanations',
       text: 'Went for a cap fixation that had come off. Dr. Sudhindra and Dr Veena are extremely professional and educative — nobody explains what’s going on with your teeth better than them.',
       who: 'Sayed Zakriya',
       svc: 'Google Review · 5.0 ★'
     },
     {
+      initials: 'NK',
       chip: 'Painless Experience',
       text: 'Dentist visit is usually a painful experience, but this one was otherwise — thank you Dr. Veena for making me smile.',
       who: 'Nikhil Kunder',
       svc: 'Verified Patient Testimonial · 5.0 ★'
     },
     {
+      initials: 'RU',
       chip: 'Family-Friendly Care',
       text: 'Quality, convenience, and affordability come together here. Truly a family-friendly dental practice that caters to patients of all ages.',
       who: 'Raghavendra U S',
       svc: 'Google Local Guide · 5.0 ★'
     },
     {
+      initials: 'VN',
       chip: 'Spotless Ambience',
       text: 'Great hygiene, professional doctors & comforting ambience.',
       who: 'Vijay N.',
       svc: 'Verified Patient Testimonial · 5.0 ★'
     },
     {
+      initials: 'AR',
       chip: 'Highly Recommended',
       text: 'Visit this clinic for any dental problems. Highly recommended. Best practice.',
       who: 'Austin Richard S',
@@ -349,74 +375,132 @@
 
   const rvTrack = $('#rvTrack');
   const rvDots = $('#rvDots');
-  let rvI = 0;
-  let rvTimer = null;
-
-  const perView = () => (window.innerWidth <= 600 ? 1 : window.innerWidth <= 860 ? 2 : 3);
-  const maxRvI = () => Math.max(0, reviews.length - perView());
-
-  function renderRvDots() {
-    if (!rvDots) return;
-    rvDots.innerHTML = '';
-    for (let i = 0; i <= maxRvI(); i++) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = i === rvI ? 'on' : '';
-      btn.setAttribute('aria-label', 'Go to review slide ' + (i + 1));
-      btn.addEventListener('click', () => {
-        rvI = i;
-        showRv();
-        resetRvTimer();
-      });
-      rvDots.appendChild(btn);
-    }
-  }
-
-  function showRv() {
-    if (!rvTrack || !rvTrack.children[0]) return;
-    rvI = Math.max(0, Math.min(rvI, maxRvI()));
-    const cardW = rvTrack.children[0].offsetWidth + (parseFloat(getComputedStyle(rvTrack).gap) || 20);
-    rvTrack.style.transform = `translateX(${-rvI * cardW}px)`;
-    renderRvDots();
-  }
-
-  function nextRv() {
-    rvI = rvI >= maxRvI() ? 0 : rvI + 1;
-    showRv();
-  }
-
-  function resetRvTimer() {
-    clearInterval(rvTimer);
-    rvTimer = setInterval(nextRv, 4300);
-  }
 
   if (rvTrack) {
-    rvTrack.innerHTML = reviews
+    rvTrack.innerHTML = [...reviews, ...reviews]
       .map(
         (r) => `
       <article class="rv-card">
-        <span class="rv-chip">${r.chip}</span>
+        <div class="rv-top-row">
+          <span class="rv-chip">${r.chip}</span>
+          <span class="rv-stars" aria-hidden="true">★★★★★</span>
+        </div>
         <blockquote>“${r.text}”</blockquote>
         <div class="rv-who">
-          <span><b>${r.who}</b><span>${r.svc}</span></span>
-          <span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <div class="rv-author-left">
+            <span class="rv-avatar" aria-hidden="true">${r.initials}</span>
+            <span><b>${r.who}</b><span>${r.svc}</span></span>
+          </div>
         </div>
       </article>`
       )
       .join('');
 
-    showRv();
-    resetRvTimer();
-    $('#rvNext')?.addEventListener('click', () => { nextRv(); resetRvTimer(); });
-    $('#rvPrev')?.addEventListener('click', () => { rvI = rvI <= 0 ? maxRvI() : rvI - 1; showRv(); resetRvTimer(); });
-    rvTrack.addEventListener('pointerenter', () => clearInterval(rvTimer));
-    rvTrack.addEventListener('pointerleave', resetRvTimer);
-    window.addEventListener('resize', showRv, { passive: true });
-    addSwipe(
-      rvTrack,
-      () => { nextRv(); resetRvTimer(); },
-      () => { rvI = rvI <= 0 ? maxRvI() : rvI - 1; showRv(); resetRvTimer(); }
-    );
+    let rvX = 0;
+    let rvTargetBoost = 0;
+    let rvHovered = false;
+    let rvDragging = false;
+    let lastDotIdx = -1;
+
+    const getCardStep = () => {
+      const first = rvTrack.children[0];
+      if (!first) return 350;
+      return first.offsetWidth + (parseFloat(getComputedStyle(rvTrack).gap) || 20);
+    };
+
+    const getLoopWidth = () => getCardStep() * reviews.length;
+
+    const updateActiveDot = () => {
+      if (!rvDots) return;
+      const step = getCardStep();
+      if (step <= 0) return;
+      const idx = Math.floor((Math.abs(rvX) + step * 0.35) / step) % reviews.length;
+      if (idx === lastDotIdx) return;
+      lastDotIdx = idx;
+      $$('button', rvDots).forEach((btn, i) => btn.classList.toggle('on', i === idx));
+    };
+
+    if (rvDots) {
+      rvDots.innerHTML = '';
+      reviews.forEach((r, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = i === 0 ? 'on' : '';
+        btn.setAttribute('aria-label', `Focus testimonial from ${r.who}`);
+        btn.addEventListener('click', () => {
+          const target = -(i * getCardStep());
+          rvTargetBoost = target - rvX;
+        });
+        rvDots.appendChild(btn);
+      });
+    }
+
+    const wrapRvX = () => {
+      const loopW = getLoopWidth();
+      if (loopW <= 0) return;
+      if (rvX <= -loopW) rvX += loopW;
+      if (rvX > 0) rvX -= loopW;
+    };
+
+    let rvLast = performance.now();
+    (function rvLoop(now) {
+      const dt = Math.min(2.2, Math.max(0.4, (now - rvLast) / 16.667));
+      rvLast = now;
+      if (!rvDragging) {
+        if (Math.abs(rvTargetBoost) > 0.6) {
+          const stepDelta = rvTargetBoost * Math.min(0.45, 0.14 * dt);
+          rvX += stepDelta;
+          rvTargetBoost -= stepDelta;
+        } else {
+          rvTargetBoost = 0;
+          rvX -= (rvHovered ? 0.34 : 0.88) * dt;
+        }
+        wrapRvX();
+        rvTrack.style.transform = `translate3d(${rvX.toFixed(2)}px, 0, 0)`;
+        updateActiveDot();
+      }
+      requestAnimationFrame(rvLoop);
+    })(performance.now());
+
+    rvTrack.addEventListener('pointerenter', () => { rvHovered = true; });
+    rvTrack.addEventListener('pointerleave', () => { rvHovered = false; });
+
+    $('#rvNext')?.addEventListener('click', () => {
+      rvTargetBoost -= getCardStep();
+    });
+    $('#rvPrev')?.addEventListener('click', () => {
+      rvTargetBoost += getCardStep();
+    });
+
+    /* Smooth real-time finger drag + flick swipe on mobile touchscreens */
+    let touchStartX = 0;
+    let touchLastX = 0;
+    let touchVelocity = 0;
+    rvTrack.addEventListener('touchstart', (e) => {
+      rvDragging = true;
+      rvTargetBoost = 0;
+      touchStartX = touchLastX = e.touches[0].clientX;
+      touchVelocity = 0;
+    }, { passive: true });
+
+    rvTrack.addEventListener('touchmove', (e) => {
+      if (!rvDragging) return;
+      const x = e.touches[0].clientX;
+      const dx = x - touchLastX;
+      touchVelocity = dx;
+      touchLastX = x;
+      rvX += dx;
+      wrapRvX();
+      rvTrack.style.transform = `translate3d(${rvX.toFixed(2)}px, 0, 0)`;
+      updateActiveDot();
+    }, { passive: true });
+
+    rvTrack.addEventListener('touchend', () => {
+      rvDragging = false;
+      if (Math.abs(touchLastX - touchStartX) > 28) {
+        rvTargetBoost = Math.max(-getCardStep(), Math.min(getCardStep(), touchVelocity * 9));
+      }
+    }, { passive: true });
   }
 
   function addSwipe(el, onLeft, onRight) {
