@@ -21,6 +21,9 @@ Golden rules for EVERY client (never mix clients up):
       4. **Hero Layout & Composition** (e.g., split editorial headline + glass doctor card vs centered/bottom display typography vs asymmetric badge framing).
       5. **Signature Specialty Section** custom-built for that clinic's #1 strength (e.g., 3-pillar Endodontics/Surgery bento, Implant step-by-step timeline, Smile/Aligner transformation showcase, Kid-First comfort promise).
       6. **Card Geometry & Section Dividers** (e.g., `3:4` arch-top doctor portraits vs square frames vs circular rings; curved scoop vs rounded sheet overlap vs clean architectural bands; distinct review card accents & booking layout).
+11. **FULL SIGNATURE ANIMATION SUITE IS MANDATORY (NEVER STRIP OR OMIT ANIMATIONS)**:
+    - Every client website MUST ship the full reference-video animation choreography (`#intro` flying tilted collage cards + zoom-out curtain, `#heroImg` clip-curtain + scroll parallax, `.badge-rotor` counter-spinning SVG badge, seamless `.ticker-track` & `.marquee-track` marquees, `.mask-lines .ml > span` masked line-by-line typography slide-ups, `.reveal-group` staggered card cascades + `imgRise` photo curtain wipes, curved sheet overlap + `.scoop`, `60fps` infinite specialty ring carousel `#spTrack`, auto-sliding `#rvTrack` review carousel with expanding pill dots, tilted Polaroid filmstrip `#galStrip`, circular `clip-path` menu & booking wipe `.book-band`, and pulsing `waPulse` + spring `#toTop`).
+    - Use dual-trigger scroll reveals (`IntersectionObserver` + `sweepVisibleTargets()` on `scroll`/`resize`/`load`) — NEVER strip `.js-reveal` on a premature global timer before below-the-fold sections scroll into view.
 
 ## Specialty Design Matrix (Reference Blueprint for New Builds)
 
