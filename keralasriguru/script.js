@@ -953,19 +953,29 @@
         const dec = parseInt(el.dataset.decimals || '0', 10);
         const suffix = el.dataset.suffix || '';
         const dur = 1500 + i * 120;
+        const show = (v, done) =>
+          (el.textContent =
+            (dec > 0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN')) + (done ? suffix : ''));
         let t0 = null;
+        let raf = 0;
+        let fin = false;
+        const finish = () => {
+          if (fin) return;
+          fin = true;
+          if (raf) cancelAnimationFrame(raf);
+          show(target, true);
+        };
         const tick = () => {
+          if (fin) return;
           t0 = t0 === null ? performance.now() : t0;
           const p = Math.max(0, Math.min(1, (performance.now() - t0) / dur));
-          const eased = 1 - Math.pow(1 - p, 3);
-          const val = target * eased;
-          el.textContent =
-            (dec > 0
-              ? val.toFixed(dec)
-              : Math.round(val).toLocaleString('en-IN')) + (p === 1 ? suffix : '');
-          if (p < 1) requestAnimationFrame(tick);
+          if (p >= 1) return finish();
+          show(target * (1 - Math.pow(1 - p, 3)), false);
+          raf = requestAnimationFrame(tick);
         };
-        requestAnimationFrame(tick);
+        raf = requestAnimationFrame(tick);
+        // safety net: rAF stalls in background tabs and static renderers
+        window.setTimeout(finish, dur + 600);
       });
     };
 

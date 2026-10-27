@@ -285,25 +285,34 @@
   if (counters) {
     const nums = $$('[data-count]', counters);
     let ran = false;
-    const paint = (el, final) => {
+    const paint = (el, forceFinal) => {
       const target = parseFloat(el.dataset.count || '0');
       const dec = parseInt(el.dataset.decimals || '0', 10);
       const sfx = el.dataset.suffix || '';
-      if (final) {
-        el.textContent = (dec > 0 ? target.toFixed(dec) : target.toLocaleString('en-IN')) + sfx;
-        return;
-      }
+      const show = (v, done) =>
+        (el.textContent = (dec > 0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN')) + (done ? sfx : ''));
+      if (forceFinal) return show(target, true);
       const dur = 1500;
       let t0 = null;
+      let raf = 0;
+      let fin = false;
+      const finish = () => {
+        if (fin) return;
+        fin = true;
+        if (raf) cancelAnimationFrame(raf);
+        show(target, true);
+      };
       const step = () => {
+        if (fin) return;
         t0 = t0 === null ? performance.now() : t0;
         const p = Math.max(0, Math.min(1, (performance.now() - t0) / dur));
-        const e = 1 - Math.pow(1 - p, 3);
-        const v = target * e;
-        el.textContent = (dec > 0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN')) + (p === 1 ? sfx : '');
-        if (p < 1) requestAnimationFrame(step);
+        if (p >= 1) return finish();
+        show(target * (1 - Math.pow(1 - p, 3)), false);
+        raf = requestAnimationFrame(step);
       };
-      requestAnimationFrame(step);
+      raf = requestAnimationFrame(step);
+      // safety net: rAF stalls in background tabs and static renderers
+      window.setTimeout(finish, dur + 600);
     };
     const run = () => {
       if (ran) return;
