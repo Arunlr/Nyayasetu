@@ -293,10 +293,11 @@
         el.textContent = (dec > 0 ? target.toFixed(dec) : target.toLocaleString('en-IN')) + sfx;
         return;
       }
-      const t0 = performance.now();
       const dur = 1500;
+      let t0 = null;
       const step = (now) => {
-        const p = Math.min(1, (now - t0) / dur);
+        if (t0 === null) t0 = now;
+        const p = Math.max(0, Math.min(1, (now - t0) / dur));
         const e = 1 - Math.pow(1 - p, 3);
         const v = target * e;
         el.textContent = (dec > 0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN')) + (p === 1 ? sfx : '');
