@@ -954,9 +954,9 @@
         const suffix = el.dataset.suffix || '';
         const dur = 1500 + i * 120;
         let t0 = null;
-        const tick = (now) => {
-          if (t0 === null) t0 = now;
-          const p = Math.max(0, Math.min(1, (now - t0) / dur));
+        const tick = () => {
+          t0 = t0 === null ? performance.now() : t0;
+          const p = Math.max(0, Math.min(1, (performance.now() - t0) / dur));
           const eased = 1 - Math.pow(1 - p, 3);
           const val = target * eased;
           el.textContent =
